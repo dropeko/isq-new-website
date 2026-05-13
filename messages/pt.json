@@ -1,0 +1,43 @@
+{
+  "meta": {
+    "title": "ISQ Brasil — Engenharia, Inspeção e Certificação",
+    "description": "Engenharia que sustenta a confiança da indústria. Há mais de 50 anos em inspeção, ensaios, certificação e P&D."
+  },
+  "nav": {
+    "solutions": "Soluções",
+    "services": "Serviços",
+    "insights": "Insights",
+    "about": "Quem Somos",
+    "blog": "Blog",
+    "contact": "Contato",
+    "ombudsman": "Ouvidoria",
+    "sustainability": "Sustentabilidade",
+    "academy": "ISQ Academy",
+    "workWithUs": "Trabalhe Conosco",
+    "menu": "Menu",
+    "close": "Fechar"
+  },
+  "hero": {
+    "eyebrow": "ISQ Brasil · desde 1974",
+    "title": {
+      "part1": "Engenharia",
+      "part2": "que sustenta a",
+      "part3": "confiança",
+      "part4": "da indústria."
+    },
+    "subtitle": {
+      "part1": "Onde a precisão",
+      "part2": "encontra a inspeção, a certificação e a inovação",
+      "part3": " — há mais de 50 anos."
+    },
+    "cta": "Falar com a ISQ",
+    "scroll": "role para descobrir"
+  },
+  "footer": {
+    "address": "Rua Estados Unidos, 22 — Sion, Belo Horizonte/MG — CEP 30315-270",
+    "phone": "+55 31 9 8303-4733",
+    "email": "contato@isqbrasil.com.br",
+    "rights": "© {year} ISQ Brasil. Todos os direitos reservados.",
+    "privacy": "Política de Privacidade"
+  }
+}
