@@ -1,0 +1,43 @@
+{
+  "meta": {
+    "title": "ISQ Brasil — Engineering, Inspection and Certification",
+    "description": "Engineering that upholds industrial trust. Over 50 years of inspection, testing, certification and R&D."
+  },
+  "nav": {
+    "solutions": "Solutions",
+    "services": "Services",
+    "insights": "Insights",
+    "about": "About",
+    "blog": "Blog",
+    "contact": "Contact",
+    "ombudsman": "Ombudsman",
+    "sustainability": "Sustainability",
+    "academy": "ISQ Academy",
+    "workWithUs": "Careers",
+    "menu": "Menu",
+    "close": "Close"
+  },
+  "hero": {
+    "eyebrow": "ISQ Brasil · since 1974",
+    "title": {
+      "part1": "Engineering",
+      "part2": "that upholds the",
+      "part3": "trust",
+      "part4": "of the industry."
+    },
+    "subtitle": {
+      "part1": "Where precision",
+      "part2": "meets inspection, certification and innovation",
+      "part3": " — for over 50 years."
+    },
+    "cta": "Talk to ISQ",
+    "scroll": "scroll to discover"
+  },
+  "footer": {
+    "address": "Rua Estados Unidos, 22 — Sion, Belo Horizonte/MG — 30315-270",
+    "phone": "+55 31 9 8303-4733",
+    "email": "contato@isqbrasil.com.br",
+    "rights": "© {year} ISQ Brasil. All rights reserved.",
+    "privacy": "Privacy Policy"
+  }
+}
