@@ -3,6 +3,9 @@ import Hero from "@/components/sections/Hero";
 import Manifesto from "@/components/sections/Manifesto";
 import Pillars from "@/components/sections/Pillars";
 import Fronts from "@/components/sections/Fronts";
+import Stats from "@/components/sections/Stats";
+import Clients from "@/components/sections/Clients";
+import Contact from "@/components/sections/Contact";
 
 export default async function HomePage({
   params,
@@ -18,6 +21,9 @@ export default async function HomePage({
       <Manifesto />
       <Pillars />
       <Fronts />
+      <Stats />
+      <Clients />
+      <Contact />
     </>
   );
 }

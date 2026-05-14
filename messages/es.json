@@ -115,6 +115,48 @@
       }
     }
   },
+  "stats": {
+    "section": "n.04 — en números",
+    "lead": "Cinco décadas de tradición técnica a escala industrial.",
+    "items": {
+      "years": { "value": 20, "suffix": "+", "label": "años de actuación en Brasil" },
+      "services": { "value": 60, "suffix": "+", "label": "servicios técnicos especializados" },
+      "people": { "value": 300, "suffix": "+", "label": "colaboradores multidisciplinares" }
+    },
+    "footnote": "Núcleo interno de innovación tecnológica · Sistema de gestión integrado certificado · Presencia en las principales comisiones técnicas del país"
+  },
+  "clients": {
+    "section": "n.05 — clientes",
+    "lead": "Compañías que confían",
+    "leadEmph": "en ISQ.",
+    "intro": "Operamos junto a líderes de la industria brasileña e internacional — en activos críticos, certificaciones regulatorias y proyectos de largo plazo.",
+    "backdrop": "Confianza",
+    "names": [
+      "Vale",
+      "Usiminas",
+      "Naturgy",
+      "Iberdrola",
+      "AngloGold Ashanti",
+      "Aperam",
+      "Celsia",
+      "Biosev",
+      "Ternium",
+      "VSB",
+      "Cenibra",
+      "Veracel"
+    ]
+  },
+  "contact": {
+    "section": "n.06 — hablemos",
+    "lead": "El próximo",
+    "leadEmph": "detalle",
+    "leadEnd": "que ISQ va a garantizar es el tuyo.",
+    "cta": "Hablar con ISQ",
+    "or": "o",
+    "phoneLabel": "llama",
+    "emailLabel": "escribe",
+    "workWithUsLabel": "trabaja con nosotros"
+  },
   "footer": {
     "address": "Rua Estados Unidos, 22 — Sion, Belo Horizonte/MG — 30315-270",
     "phone": "+55 31 9 8303-4733",

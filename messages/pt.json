@@ -115,6 +115,48 @@
       }
     }
   },
+  "stats": {
+    "section": "n.04 — em números",
+    "lead": "Cinco décadas de tradição técnica em escala industrial.",
+    "items": {
+      "years": { "value": 20, "suffix": "+", "label": "anos de atuação no Brasil" },
+      "services": { "value": 60, "suffix": "+", "label": "serviços técnicos especializados" },
+      "people": { "value": 300, "suffix": "+", "label": "colaboradores multidisciplinares" }
+    },
+    "footnote": "Núcleo interno de inovação tecnológica · Sistema de gestão integrado certificado · Presença nas principais comissões técnicas do país"
+  },
+  "clients": {
+    "section": "n.05 — clientes",
+    "lead": "Companhias que confiam",
+    "leadEmph": "na ISQ.",
+    "intro": "Operamos lado a lado com líderes da indústria brasileira e internacional — em ativos críticos, certificações regulatórias e projetos de longo prazo.",
+    "backdrop": "Confiança",
+    "names": [
+      "Vale",
+      "Usiminas",
+      "Naturgy",
+      "Iberdrola",
+      "AngloGold Ashanti",
+      "Aperam",
+      "Celsia",
+      "Biosev",
+      "Ternium",
+      "VSB",
+      "Cenibra",
+      "Veracel"
+    ]
+  },
+  "contact": {
+    "section": "n.06 — vamos conversar",
+    "lead": "O próximo",
+    "leadEmph": "detalhe",
+    "leadEnd": "que a ISQ vai garantir é o seu.",
+    "cta": "Falar com a ISQ",
+    "or": "ou",
+    "phoneLabel": "ligue",
+    "emailLabel": "escreva",
+    "workWithUsLabel": "trabalhe conosco"
+  },
   "footer": {
     "address": "Rua Estados Unidos, 22 — Sion, Belo Horizonte/MG — CEP 30315-270",
     "phone": "+55 31 9 8303-4733",
