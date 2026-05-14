@@ -33,6 +33,19 @@
     "cta": "Talk to ISQ",
     "scroll": "scroll to discover"
   },
+  "manifesto": {
+    "section": "n.01 — manifesto",
+    "line1": "Behind every",
+    "line1Emph": "plant that runs,",
+    "line2": "every structure that",
+    "line2Emph": "holds,",
+    "line3": "there is a",
+    "line3Emph": "technical detail",
+    "line4": "that",
+    "line4Emph": "must be right.",
+    "signature": "For 50 years, ISQ has lived in that detail.",
+    "marker": "50 years · technical tradition"
+  },
   "footer": {
     "address": "Rua Estados Unidos, 22 — Sion, Belo Horizonte/MG — 30315-270",
     "phone": "+55 31 9 8303-4733",

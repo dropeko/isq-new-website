@@ -1,0 +1,155 @@
+"use client";
+
+import { motion, type Variants } from "motion/react";
+import { useTranslations } from "next-intl";
+import Container from "@/components/ui/Container";
+
+const containerVariants: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.18,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const lineMaskVariants: Variants = {
+  hidden: {},
+  visible: {},
+};
+
+const lineInnerVariants: Variants = {
+  hidden: { y: "110%" },
+  visible: {
+    y: "0%",
+    transition: { duration: 1, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+const fadeUpVariants: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+function Line({
+  className,
+  children,
+}: {
+  className?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <motion.span
+      variants={lineMaskVariants}
+      className="relative block overflow-hidden pb-[0.08em] leading-[0.98]"
+    >
+      <motion.span
+        variants={lineInnerVariants}
+        className={`inline-block will-change-transform ${className ?? ""}`}
+      >
+        {children}
+      </motion.span>
+    </motion.span>
+  );
+}
+
+export default function Manifesto() {
+  const t = useTranslations("manifesto");
+
+  return (
+    <section
+      aria-label="Manifesto"
+      className="relative isolate overflow-hidden bg-isq-navy py-[clamp(7rem,16vw,14rem)] text-isq-off"
+    >
+      <Container className="relative">
+        <div className="grid grid-cols-12 gap-y-12">
+          {/* Rail blueprint à esquerda — continuidade com o overlay técnico do hero */}
+          <div className="col-span-12 lg:col-span-2">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.4 }}
+              variants={fadeUpVariants}
+              className="flex items-center gap-4 lg:flex-col lg:items-start lg:gap-6"
+            >
+              <span className="text-[10px] font-medium uppercase tracking-[0.32em] text-isq-red">
+                {t("section")}
+              </span>
+              <span
+                aria-hidden
+                className="h-px w-24 bg-isq-off/25 lg:h-24 lg:w-px"
+              />
+              <span className="text-[10px] uppercase tracking-[0.32em] text-isq-off/45">
+                {t("marker")}
+              </span>
+            </motion.div>
+          </div>
+
+          {/* Bloco do manifesto */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={containerVariants}
+            className="col-span-12 lg:col-span-10 lg:pl-4"
+          >
+            <h2 className="font-serif tracking-[-0.02em] text-[clamp(2.25rem,6vw,6rem)] leading-[1.02]">
+              <Line className="font-sans font-extralight text-isq-off/55">
+                {t("line1")}{" "}
+                <em className="font-serif italic font-normal text-isq-off">
+                  {t("line1Emph")}
+                </em>
+              </Line>
+              <Line className="font-sans font-extralight text-isq-off/55">
+                {t("line2")}{" "}
+                <em className="font-serif italic font-normal text-isq-off">
+                  {t("line2Emph")}
+                </em>
+              </Line>
+              <Line className="font-sans font-extralight text-isq-off/55">
+                {t("line3")}{" "}
+                <strong className="font-sans font-semibold text-isq-off">
+                  {t("line3Emph")}
+                </strong>
+              </Line>
+              <Line className="font-sans font-extralight text-isq-off/55">
+                {t("line4")}{" "}
+                <strong className="font-sans font-semibold text-isq-red">
+                  {t("line4Emph")}
+                </strong>
+              </Line>
+            </h2>
+
+            {/* Assinatura editorial */}
+            <motion.div
+              variants={fadeUpVariants}
+              className="mt-14 flex max-w-2xl items-start gap-5 lg:mt-20"
+            >
+              <span
+                aria-hidden
+                className="mt-3 h-px w-12 shrink-0 bg-isq-off/35"
+              />
+              <p className="font-serif italic text-base text-isq-off/70 sm:text-lg">
+                {t("signature")}
+              </p>
+            </motion.div>
+          </motion.div>
+        </div>
+      </Container>
+
+      {/* Detalhe decorativo no canto inferior direito — número da seção em escala
+          editorial gigante (referência ao "01" das revistas técnicas) */}
+      <span
+        aria-hidden
+        className="pointer-events-none absolute bottom-[-2vw] right-[-1vw] select-none font-serif text-[20vw] leading-none text-isq-off/[0.04]"
+      >
+        01
+      </span>
+    </section>
+  );
+}
