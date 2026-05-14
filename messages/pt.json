@@ -33,6 +33,19 @@
     "cta": "Falar com a ISQ",
     "scroll": "role para descobrir"
   },
+  "manifesto": {
+    "section": "n.01 — manifesto",
+    "line1": "Por trás de cada",
+    "line1Emph": "planta que opera,",
+    "line2": "de cada estrutura que",
+    "line2Emph": "sustenta,",
+    "line3": "há um",
+    "line3Emph": "detalhe técnico",
+    "line4": "que",
+    "line4Emph": "precisa estar certo.",
+    "signature": "Há 50 anos, é nesse detalhe que a ISQ vive.",
+    "marker": "50 anos · tradição técnica"
+  },
   "footer": {
     "address": "Rua Estados Unidos, 22 — Sion, Belo Horizonte/MG — CEP 30315-270",
     "phone": "+55 31 9 8303-4733",
