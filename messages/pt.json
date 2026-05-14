@@ -88,6 +88,33 @@
       }
     }
   },
+  "fronts": {
+    "section": "n.03 — três frentes",
+    "lead": "Como queremos atuar com você.",
+    "items": {
+      "sectorSolutions": {
+        "number": "01",
+        "kicker": "frente · 01",
+        "title": "Soluções setoriais",
+        "description": "Aconselhamento estratégico adaptado ao seu setor — óleo & gás, energia, mineração, siderurgia, infraestrutura e indústria de transformação.",
+        "cta": "Explore as soluções"
+      },
+      "technicalServices": {
+        "number": "02",
+        "kicker": "frente · 02",
+        "title": "Serviços técnicos",
+        "description": "Inspeção, ensaios não-destrutivos, calibração, engenharia de avaliação e laudos para a sua operação crítica.",
+        "cta": "Pedir cotação"
+      },
+      "academy": {
+        "number": "03",
+        "kicker": "frente · 03",
+        "title": "Formação & certificação",
+        "description": "Capacitação profissional em normas, métodos e certificações reconhecidas internacionalmente, via ISQ Academy.",
+        "cta": "Conhecer a Academy"
+      }
+    }
+  },
   "footer": {
     "address": "Rua Estados Unidos, 22 — Sion, Belo Horizonte/MG — CEP 30315-270",
     "phone": "+55 31 9 8303-4733",
