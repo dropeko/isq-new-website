@@ -64,8 +64,15 @@ export default function Manifesto() {
   return (
     <section
       aria-label="Manifesto"
-      className="relative isolate overflow-hidden bg-isq-navy py-[clamp(7rem,16vw,14rem)] text-isq-off"
+      className="relative isolate overflow-hidden bg-isq-off py-[clamp(7rem,16vw,14rem)] text-isq-navy"
     >
+      {/* Hairline superior — divisor sutil que sinaliza nova seção sem
+          quebrar a continuidade off-white com o hero */}
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 mx-auto block h-px w-full max-w-[110rem] origin-left bg-isq-navy/10"
+      />
+
       <Container className="relative">
         <div className="grid grid-cols-12 gap-y-12">
           {/* Rail blueprint à esquerda — continuidade com o overlay técnico do hero */}
@@ -82,9 +89,9 @@ export default function Manifesto() {
               </span>
               <span
                 aria-hidden
-                className="h-px w-24 bg-isq-off/25 lg:h-24 lg:w-px"
+                className="h-px w-24 bg-isq-navy/20 lg:h-24 lg:w-px"
               />
-              <span className="text-[10px] uppercase tracking-[0.32em] text-isq-off/45">
+              <span className="text-[10px] uppercase tracking-[0.32em] text-isq-navy/45">
                 {t("marker")}
               </span>
             </motion.div>
@@ -99,25 +106,25 @@ export default function Manifesto() {
             className="col-span-12 lg:col-span-10 lg:pl-4"
           >
             <h2 className="font-serif tracking-[-0.02em] text-[clamp(2.25rem,6vw,6rem)] leading-[1.02]">
-              <Line className="font-sans font-extralight text-isq-off/55">
+              <Line className="font-sans font-extralight text-isq-navy/45">
                 {t("line1")}{" "}
-                <em className="font-serif italic font-normal text-isq-off">
+                <em className="font-serif italic font-normal text-isq-navy">
                   {t("line1Emph")}
                 </em>
               </Line>
-              <Line className="font-sans font-extralight text-isq-off/55">
+              <Line className="font-sans font-extralight text-isq-navy/45">
                 {t("line2")}{" "}
-                <em className="font-serif italic font-normal text-isq-off">
+                <em className="font-serif italic font-normal text-isq-navy">
                   {t("line2Emph")}
                 </em>
               </Line>
-              <Line className="font-sans font-extralight text-isq-off/55">
+              <Line className="font-sans font-extralight text-isq-navy/45">
                 {t("line3")}{" "}
-                <strong className="font-sans font-semibold text-isq-off">
+                <strong className="font-sans font-semibold text-isq-navy">
                   {t("line3Emph")}
                 </strong>
               </Line>
-              <Line className="font-sans font-extralight text-isq-off/55">
+              <Line className="font-sans font-extralight text-isq-navy/45">
                 {t("line4")}{" "}
                 <strong className="font-sans font-semibold text-isq-red">
                   {t("line4Emph")}
@@ -132,9 +139,9 @@ export default function Manifesto() {
             >
               <span
                 aria-hidden
-                className="mt-3 h-px w-12 shrink-0 bg-isq-off/35"
+                className="mt-3 h-px w-12 shrink-0 bg-isq-navy/30"
               />
-              <p className="font-serif italic text-base text-isq-off/70 sm:text-lg">
+              <p className="font-serif italic text-base text-isq-navy/65 sm:text-lg">
                 {t("signature")}
               </p>
             </motion.div>
@@ -146,7 +153,7 @@ export default function Manifesto() {
           editorial gigante (referência ao "01" das revistas técnicas) */}
       <span
         aria-hidden
-        className="pointer-events-none absolute bottom-[-2vw] right-[-1vw] select-none font-serif text-[20vw] leading-none text-isq-off/[0.04]"
+        className="pointer-events-none absolute bottom-[-2vw] right-[-1vw] select-none font-serif text-[20vw] leading-none text-isq-navy/[0.04]"
       >
         01
       </span>
