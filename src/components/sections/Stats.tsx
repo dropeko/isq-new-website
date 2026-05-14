@@ -4,6 +4,7 @@ import { motion, type Variants } from "motion/react";
 import { useTranslations } from "next-intl";
 import Container from "@/components/ui/Container";
 import StatCounter from "@/components/stats/StatCounter";
+import GptwSeal from "@/components/brand/GptwSeal";
 
 const fadeVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
@@ -106,17 +107,25 @@ export default function Stats() {
           })}
         </motion.div>
 
-        {/* Footnote — outras credenciais qualitativas */}
-        <motion.p
+        {/* Trust markers row — footnote textual + selo Great Place to Work */}
+        <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.6 }}
+          viewport={{ once: true, amount: 0.4 }}
           variants={fadeVariants}
-          className="mt-[clamp(4rem,8vw,6rem)] flex items-start gap-4 border-t border-isq-navy/10 pt-8 text-xs uppercase tracking-[0.22em] text-isq-navy/50 sm:text-[13px]"
+          className="mt-[clamp(4rem,8vw,6rem)] grid grid-cols-12 gap-x-8 gap-y-8 border-t border-isq-navy/10 pt-10"
         >
-          <span aria-hidden className="mt-2 h-px w-8 shrink-0 bg-isq-navy/30" />
-          <span>{t("footnote")}</span>
-        </motion.p>
+          <p className="col-span-12 flex items-start gap-4 text-xs uppercase tracking-[0.22em] text-isq-navy/55 sm:text-[13px] lg:col-span-8">
+            <span
+              aria-hidden
+              className="mt-2 h-px w-8 shrink-0 bg-isq-navy/30"
+            />
+            <span>{t("footnote")}</span>
+          </p>
+          <div className="col-span-12 flex items-center lg:col-span-4 lg:justify-end">
+            <GptwSeal size={60} />
+          </div>
+        </motion.div>
       </Container>
 
       {/* "04" decorativo no canto inferior esquerdo */}
