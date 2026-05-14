@@ -46,6 +46,48 @@
     "signature": "For 50 years, ISQ has lived in that detail.",
     "marker": "50 years · technical tradition"
   },
+  "pillars": {
+    "section": "n.02 — what we deliver",
+    "lead": {
+      "part1": "We generate",
+      "part2": "value for your business,",
+      "part3": "brand, products and",
+      "part4": "services."
+    },
+    "intro": "We act on your behalf to promote the quality of your products, services, facilities and processes — bringing recognition, competitiveness and innovation to your operation.",
+    "items": {
+      "marketAccess": {
+        "number": "01",
+        "title": "Market access",
+        "description": "Internationally recognized certifications open doors, qualify suppliers and unlock the tenders that matter."
+      },
+      "licenseToOperate": {
+        "number": "02",
+        "title": "License to operate",
+        "description": "Regulatory, environmental and technical compliance so you can sustain operations without surprises or downtime."
+      },
+      "safety": {
+        "number": "03",
+        "title": "Safety and reliability",
+        "description": "Non-destructive testing and continuous inspection cut failure risk on critical assets — before it becomes a shutdown."
+      },
+      "costControl": {
+        "number": "04",
+        "title": "Cost control",
+        "description": "Catching a problem early costs a fraction of fixing it late. Inspection is operating margin."
+      },
+      "innovation": {
+        "number": "05",
+        "title": "Accelerated innovation",
+        "description": "R&D, product testing and technical prototyping shorten the cycle from idea to validation to market."
+      },
+      "reputation": {
+        "number": "06",
+        "title": "Brand reputation",
+        "description": "Recognized seals make sure your delivery is trusted before it is even tested — by client, regulator and market."
+      }
+    }
+  },
   "footer": {
     "address": "Rua Estados Unidos, 22 — Sion, Belo Horizonte/MG — 30315-270",
     "phone": "+55 31 9 8303-4733",

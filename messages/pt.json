@@ -46,6 +46,48 @@
     "signature": "Há 50 anos, é nesse detalhe que a ISQ vive.",
     "marker": "50 anos · tradição técnica"
   },
+  "pillars": {
+    "section": "n.02 — o que entregamos",
+    "lead": {
+      "part1": "Geramos",
+      "part2": "valor para o seu negócio,",
+      "part3": "marca, produtos e",
+      "part4": "serviços."
+    },
+    "intro": "Agimos no seu interesse para promover a qualidade dos seus produtos, serviços, instalações e processos — trazendo reconhecimento, competitividade e inovação para a sua operação.",
+    "items": {
+      "marketAccess": {
+        "number": "01",
+        "title": "Acesso a mercados",
+        "description": "Certificações reconhecidas internacionalmente que abrem portas, qualificam fornecedores e habilitam você nas licitações que importam."
+      },
+      "licenseToOperate": {
+        "number": "02",
+        "title": "Licença para operar",
+        "description": "Conformidade regulatória, ambiental e técnica para você sustentar a operação sem surpresas e sem interrupção."
+      },
+      "safety": {
+        "number": "03",
+        "title": "Segurança e confiabilidade",
+        "description": "Ensaios não-destrutivos e inspeção contínua reduzem risco de falha em ativos críticos — antes que se transformem em parada."
+      },
+      "costControl": {
+        "number": "04",
+        "title": "Controle de custos",
+        "description": "Detectar o problema cedo custa fração do que custa corrigir tarde. Inspeção é margem operacional."
+      },
+      "innovation": {
+        "number": "05",
+        "title": "Inovação acelerada",
+        "description": "P&D, ensaios de produto e prototipagem técnica encurtam o ciclo entre ideia, validação e mercado."
+      },
+      "reputation": {
+        "number": "06",
+        "title": "Reputação da marca",
+        "description": "Selos reconhecidos garantem que a sua entrega seja crida antes de ser provada — pelo cliente, pelo regulador e pelo mercado."
+      }
+    }
+  },
   "footer": {
     "address": "Rua Estados Unidos, 22 — Sion, Belo Horizonte/MG — CEP 30315-270",
     "phone": "+55 31 9 8303-4733",
