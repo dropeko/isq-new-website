@@ -8,6 +8,7 @@ import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 import ScrollTriggerProvider from "@/components/providers/ScrollTriggerProvider";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import OrganizationJsonLd from "@/components/seo/OrganizationJsonLd";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -33,9 +34,38 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "meta" });
+  const title = t("title");
+  const description = t("description");
+  const localeMap: Record<string, string> = {
+    pt: "pt_BR",
+    en: "en_US",
+    es: "es_ES",
+  };
   return {
-    title: t("title"),
-    description: t("description"),
+    title,
+    description,
+    alternates: {
+      canonical: locale === routing.defaultLocale ? "/" : `/${locale}`,
+      languages: {
+        "pt-BR": "/",
+        "en-US": "/en",
+        "es-ES": "/es",
+      },
+    },
+    openGraph: {
+      type: "website",
+      title,
+      description,
+      siteName: "ISQ Brasil",
+      locale: localeMap[locale] ?? "pt_BR",
+      url: locale === routing.defaultLocale ? "/" : `/${locale}`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+    robots: { index: true, follow: true },
   };
 }
 
@@ -59,11 +89,18 @@ export default async function LocaleLayout({
       suppressHydrationWarning
     >
       <body>
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-isq-navy focus:px-5 focus:py-3 focus:text-xs focus:font-semibold focus:uppercase focus:tracking-[0.2em] focus:text-isq-off"
+        >
+          {locale === "en" ? "Skip to content" : locale === "es" ? "Saltar al contenido" : "Pular para o conteúdo"}
+        </a>
+        <OrganizationJsonLd />
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ScrollTriggerProvider>
             <SmoothScrollProvider>
               <Header />
-              <main>{children}</main>
+              <main id="main">{children}</main>
               <Footer />
             </SmoothScrollProvider>
           </ScrollTriggerProvider>

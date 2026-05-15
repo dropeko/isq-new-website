@@ -1,7 +1,14 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { animate, useInView, useMotionValue, useTransform, motion } from "motion/react";
+import {
+  animate,
+  motion,
+  useInView,
+  useMotionValue,
+  useReducedMotion,
+  useTransform,
+} from "motion/react";
 
 type Props = {
   value: number;
@@ -22,18 +29,23 @@ export default function StatCounter({
 }: Props) {
   const ref = useRef<HTMLSpanElement | null>(null);
   const inView = useInView(ref, { once: true, amount: 0.5 });
+  const reduceMotion = useReducedMotion();
 
   const count = useMotionValue(0);
   const rounded = useTransform(count, (v) => Math.round(v).toLocaleString("pt-BR"));
 
   useEffect(() => {
     if (!inView) return;
+    if (reduceMotion) {
+      count.set(value);
+      return;
+    }
     const controls = animate(count, value, {
       duration,
       ease: [0.22, 1, 0.36, 1],
     });
     return controls.stop;
-  }, [inView, value, duration, count]);
+  }, [inView, value, duration, count, reduceMotion]);
 
   return (
     <span ref={ref} className={className}>
