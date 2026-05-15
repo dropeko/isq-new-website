@@ -1,7 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "motion/react";
 import { clsx } from "clsx";
+import type { PhotoCredit } from "@/data/photoCredits";
 
 type FrontEntryProps = {
   number: string;
@@ -10,12 +12,14 @@ type FrontEntryProps = {
   description: string;
   cta: string;
   href?: string;
+  photo?: PhotoCredit;
 };
 
 /**
  * Entrada editorial full-width — base off-white, vira navy invertido no hover.
- * Bordas hairline em cima e em baixo criam o efeito de "fileira" vertical.
- * Reveal individual via whileInView.
+ * Quando recebe `photo`, uma thumbnail surge da direita no hover, posicionada
+ * absoluta entre title e CTA, com leve scale e fade. No mobile a foto é
+ * suprimida — a inversão de cor já carrega a interação.
  */
 export default function FrontEntry({
   number,
@@ -24,6 +28,7 @@ export default function FrontEntry({
   description,
   cta,
   href = "#",
+  photo,
 }: FrontEntryProps) {
   return (
     <motion.a
@@ -38,7 +43,7 @@ export default function FrontEntry({
         "hover:bg-isq-navy",
       )}
     >
-      {/* Layer de hover que "sobe" do fundo — animação extra além do bg-color */}
+      {/* Layer de hover que "sobe" do fundo */}
       <span
         aria-hidden
         className={clsx(
@@ -68,7 +73,7 @@ export default function FrontEntry({
         </div>
 
         {/* Title */}
-        <div className="col-span-12 lg:col-span-6">
+        <div className="col-span-12 lg:col-span-5">
           <h3
             className={clsx(
               "font-serif tracking-[-0.015em]",
@@ -93,6 +98,28 @@ export default function FrontEntry({
             {description}
           </p>
         </div>
+
+        {/* Photo thumbnail — só desktop, revela no hover */}
+        {photo && (
+          <div className="hidden lg:col-span-1 lg:block" aria-hidden>
+            <div
+              className={clsx(
+                "relative aspect-[4/3] w-full overflow-hidden rounded-[2px]",
+                "opacity-0 translate-x-4",
+                "transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]",
+                "group-hover:opacity-100 group-hover:translate-x-0",
+              )}
+            >
+              <Image
+                src={photo.src}
+                alt=""
+                fill
+                sizes="(max-width: 1024px) 0px, 18vw"
+                className="object-cover"
+              />
+            </div>
+          </div>
+        )}
 
         {/* CTA */}
         <div className="col-span-12 flex items-center justify-end lg:col-span-1">
