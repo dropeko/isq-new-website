@@ -6,6 +6,8 @@ type Props = {
   size?: number;
   label?: string;
   caption?: string;
+  /** Stack horizontal (selo + texto lado-a-lado) ou vertical (selo em cima) */
+  orientation?: "horizontal" | "vertical";
 };
 
 /**
@@ -19,25 +21,34 @@ type Props = {
 export default function GptwSeal({
   href,
   className,
-  size = 56,
-  label = "Selo",
+  size = 110,
+  label = "Selo · Brasil",
   caption = "Great Place to Work · Certificada 2025/26",
+  orientation = "vertical",
 }: Props) {
+  const isVertical = orientation === "vertical";
+
   const inner = (
-    <span className={`group inline-flex items-center gap-4 ${className ?? ""}`}>
+    <span
+      className={[
+        "group inline-flex",
+        isVertical ? "flex-col items-start gap-4" : "items-center gap-5",
+        className ?? "",
+      ].join(" ")}
+    >
       <Image
         src="/brand/gptw-certified.svg"
         alt="Selo Great Place to Work — Certificada Mar/2025 a Mar/2026 — Brasil"
         width={size}
         height={Math.round((size * 311) / 220)}
         priority={false}
-        className="shrink-0 transition-transform duration-500 group-hover:-translate-y-0.5"
+        className="shrink-0 transition-transform duration-500 group-hover:-translate-y-1"
       />
-      <span className="flex flex-col">
-        <span className="text-[10px] uppercase tracking-[0.32em] text-isq-navy/45">
+      <span className="flex flex-col gap-1.5">
+        <span className="text-[10px] font-medium uppercase tracking-[0.32em] text-isq-red">
           {label}
         </span>
-        <span className="text-sm font-medium leading-snug text-isq-navy transition-colors duration-500 group-hover:text-isq-red">
+        <span className="text-sm font-medium leading-snug text-isq-navy transition-colors duration-500 group-hover:text-isq-red sm:text-[15px]">
           {caption}
         </span>
       </span>

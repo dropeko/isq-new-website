@@ -122,8 +122,8 @@ export default function Stats() {
             />
             <span>{t("footnote")}</span>
           </p>
-          <div className="col-span-12 flex items-center lg:col-span-4 lg:justify-end">
-            <GptwSeal size={60} />
+          <div className="col-span-12 flex items-start lg:col-span-4 lg:justify-end">
+            <GptwSeal />
           </div>
         </motion.div>
       </Container>
