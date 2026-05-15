@@ -152,15 +152,6 @@ export default function Pillars() {
           />
         </div>
       </Container>
-
-      {/* "02" decorativo gigante no canto inferior esquerdo (alterna com o "01"
-          do manifesto para criar ritmo de revista técnica) */}
-      <span
-        aria-hidden
-        className="pointer-events-none absolute bottom-[-2vw] left-[-1vw] select-none font-serif text-[20vw] leading-none text-isq-navy/[0.04]"
-      >
-        02
-      </span>
     </section>
   );
 }

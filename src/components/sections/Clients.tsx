@@ -27,24 +27,9 @@ const itemVariants: Variants = {
   },
 };
 
-const backdropVariants: Variants = {
-  hidden: { opacity: 0, scaleX: 0.92 },
-  visible: {
-    opacity: 1,
-    scaleX: 1,
-    transition: { duration: 1.6, ease: [0.22, 1, 0.36, 1], delay: 0.1 },
-  },
-};
-
 /**
- * Clientes (Fase 1.5) — substitui a faixa "clientes" do site antigo.
- * Em vez de logos rasterizados, lista tipográfica com a palavra "Confiança"
- * em Fraunces italic gigante como backdrop diagonal — referência ao
- * "Collabs" verde-limão do site do Lando, traduzido para a linguagem
- * institucional da ISQ.
- *
- * Cada nome alterna entre serif italic e sans semibold, criando um ritmo
- * editorial. Hover destaca em vermelho ISQ.
+ * Clientes — lista tipográfica com alternância de pesos para ritmo editorial.
+ * Hover destaca em vermelho ISQ.
  */
 export default function Clients() {
   const t = useTranslations("clients");
@@ -113,30 +98,8 @@ export default function Clients() {
           </div>
         </div>
 
-        {/* Lista de clientes com "Confiança" gigante como backdrop */}
+        {/* Lista de clientes */}
         <div className="relative mt-[clamp(3rem,6vw,5rem)]">
-          {/* Backdrop word — Fraunces italic gigante, levemente rotacionado */}
-          <motion.span
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={backdropVariants}
-            aria-hidden
-            className="pointer-events-none absolute inset-0 flex select-none items-center justify-center"
-          >
-            <span
-              className="block font-serif italic text-isq-red/[0.08]"
-              style={{
-                fontSize: "clamp(8rem, 22vw, 22rem)",
-                lineHeight: "0.9",
-                transform: "rotate(-3deg)",
-                letterSpacing: "-0.04em",
-              }}
-            >
-              {t("backdrop")}
-            </span>
-          </motion.span>
-
           {/* Grid de nomes — alternância de pesos para ritmo editorial */}
           <motion.ul
             initial="hidden"
@@ -171,13 +134,6 @@ export default function Clients() {
           </motion.ul>
         </div>
       </Container>
-
-      <span
-        aria-hidden
-        className="pointer-events-none absolute bottom-[-2vw] right-[-1vw] select-none font-serif text-[20vw] leading-none text-isq-navy/[0.04]"
-      >
-        05
-      </span>
     </section>
   );
 }

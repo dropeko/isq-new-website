@@ -156,15 +156,6 @@ export default function Manifesto() {
           </motion.div>
         </div>
       </Container>
-
-      {/* Detalhe decorativo no canto inferior direito — número da seção em escala
-          editorial gigante (referência ao "01" das revistas técnicas) */}
-      <span
-        aria-hidden
-        className="pointer-events-none absolute bottom-[-2vw] right-[-1vw] select-none font-serif text-[20vw] leading-none text-isq-navy/[0.04]"
-      >
-        01
-      </span>
     </section>
   );
 }
