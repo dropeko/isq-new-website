@@ -44,10 +44,12 @@
     "line4": "que",
     "line4Emph": "tiene que estar bien.",
     "signature": "Desde hace 50 años, ISQ vive en ese detalle.",
-    "marker": "50 años · tradición técnica"
+    "marker": "50 años · tradición técnica",
+    "meta": "Brasil · 2005 → 2026"
   },
   "pillars": {
     "section": "n.02 — lo que entregamos",
+    "meta": "04 pilares · 06 sectores",
     "lead": {
       "part1": "Generamos",
       "part2": "valor para tu negocio,",
@@ -79,6 +81,7 @@
   },
   "fronts": {
     "section": "n.03 — tres frentes",
+    "meta": "03 frentes · 60+ servicios",
     "lead": "Cómo trabajamos contigo.",
     "items": {
       "sectorSolutions": {
@@ -118,6 +121,7 @@
     "lead": "Compañías que confían",
     "leadEmph": "en ISQ.",
     "backdrop": "Confianza",
+    "sectors": ["Petróleo y gas", "Energía", "Minería", "Siderurgia", "Infraestructura", "Manufactura"],
     "names": [
       "Vale",
       "Usiminas",
@@ -135,6 +139,7 @@
   },
   "contact": {
     "section": "n.06 — hablemos",
+    "meta": "Respuesta ≤ 24h hábiles",
     "lead": "El próximo",
     "leadEmph": "detalle",
     "leadEnd": "que ISQ va a garantizar es el tuyo.",

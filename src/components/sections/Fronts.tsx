@@ -40,7 +40,7 @@ export default function Fronts() {
   return (
     <section
       aria-label="Três frentes"
-      className="relative isolate overflow-hidden bg-isq-off pt-[clamp(7rem,12vw,10rem)] pb-0"
+      className="relative isolate overflow-hidden bg-isq-off pt-[clamp(4.5rem,8vw,7rem)] pb-0"
     >
       {/* Hairline superior */}
       <span
@@ -63,6 +63,13 @@ export default function Fronts() {
           </div>
 
           <div className="col-span-12 lg:col-span-10 lg:pl-4">
+            <div className="mb-3 hidden items-baseline justify-end gap-2 lg:flex">
+              <span aria-hidden className="h-px w-10 bg-isq-navy/20" />
+              <span className="text-[10px] uppercase tracking-[0.28em] text-isq-navy/45">
+                {t("meta")}
+              </span>
+            </div>
+
             <motion.h2
               initial="hidden"
               whileInView="visible"
@@ -80,7 +87,7 @@ export default function Fronts() {
 
       {/* Lista full-bleed — fora do Container para a inversão tomar toda a largura.
           Top hairline aqui marca o início do bloco interativo. */}
-      <div className="mt-[clamp(4rem,8vw,7rem)] border-t border-isq-navy/15">
+      <div className="mt-[clamp(3rem,5vw,4.5rem)] border-t border-isq-navy/15">
         <FrontEntry
           number={items.sectorSolutions.number}
           kicker={items.sectorSolutions.kicker}

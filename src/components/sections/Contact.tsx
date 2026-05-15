@@ -68,7 +68,7 @@ export default function Contact() {
     <section
       id="contato"
       aria-label="Contato"
-      className="relative isolate overflow-hidden bg-isq-off pt-[clamp(7rem,14vw,12rem)] pb-[clamp(7rem,14vw,12rem)]"
+      className="relative isolate overflow-hidden bg-isq-off pt-[clamp(4.5rem,9vw,7.5rem)] pb-[clamp(4.5rem,9vw,7.5rem)]"
     >
       <span
         aria-hidden
@@ -90,6 +90,13 @@ export default function Contact() {
           </div>
 
           <div className="col-span-12 lg:col-span-6 lg:pl-4">
+            <div className="mb-3 hidden items-baseline gap-2 lg:flex">
+              <span aria-hidden className="h-px w-10 bg-isq-navy/20" />
+              <span className="text-[10px] uppercase tracking-[0.28em] text-isq-navy/45">
+                {t("meta")}
+              </span>
+            </div>
+
             {/* Headline em 2 linhas */}
             <motion.h2
               initial="hidden"
@@ -115,7 +122,7 @@ export default function Contact() {
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
               variants={fadeVariants}
-              className="mt-14 flex flex-col items-start gap-8 lg:mt-20"
+              className="mt-10 flex flex-col items-start gap-6 lg:mt-14"
             >
               <button
                 type="button"
