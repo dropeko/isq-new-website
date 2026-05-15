@@ -1,10 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion, type Variants } from "motion/react";
 import { useTranslations } from "next-intl";
 import Container from "@/components/ui/Container";
 import ContactFormModal from "@/components/contact/ContactFormModal";
+import { photoCredits } from "@/data/photoCredits";
 
 const containerVariants: Variants = {
   hidden: {},
@@ -74,7 +76,7 @@ export default function Contact() {
       />
 
       <Container className="relative">
-        <div className="grid grid-cols-12 gap-y-12">
+        <div className="grid grid-cols-12 gap-x-8 gap-y-12">
           <div className="col-span-12 lg:col-span-2">
             <motion.span
               initial={{ opacity: 0, y: 12 }}
@@ -87,7 +89,7 @@ export default function Contact() {
             </motion.span>
           </div>
 
-          <div className="col-span-12 lg:col-span-10 lg:pl-4">
+          <div className="col-span-12 lg:col-span-6 lg:pl-4">
             {/* Headline em 2 linhas */}
             <motion.h2
               initial="hidden"
@@ -170,6 +172,25 @@ export default function Contact() {
               </ul>
             </motion.div>
           </div>
+
+          {/* Coluna lateral — atmosfera */}
+          <motion.div
+            initial={{ opacity: 0, y: 32 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+            className="col-span-12 hidden lg:col-span-4 lg:block"
+          >
+            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2px] bg-isq-navy/5">
+              <Image
+                src={photoCredits.contactSide.src}
+                alt={photoCredits.contactSide.alt}
+                fill
+                sizes="(max-width: 1024px) 0px, 30vw"
+                className="object-cover"
+              />
+            </div>
+          </motion.div>
         </div>
       </Container>
 

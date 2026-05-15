@@ -4,6 +4,7 @@ import { motion, type Variants } from "motion/react";
 import { useTranslations } from "next-intl";
 import Container from "@/components/ui/Container";
 import FrontEntry from "@/components/fronts/FrontEntry";
+import { photoCredits } from "@/data/photoCredits";
 
 const fadeVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
@@ -87,6 +88,7 @@ export default function Fronts() {
           description={items.sectorSolutions.description}
           cta={items.sectorSolutions.cta}
           href="#solucoes"
+          photo={photoCredits.frontsSolutions}
         />
         <FrontEntry
           number={items.technicalServices.number}
@@ -95,6 +97,7 @@ export default function Fronts() {
           description={items.technicalServices.description}
           cta={items.technicalServices.cta}
           href="#servicos"
+          photo={photoCredits.frontsServices}
         />
         <FrontEntry
           number={items.academy.number}
@@ -103,6 +106,7 @@ export default function Fronts() {
           description={items.academy.description}
           cta={items.academy.cta}
           href="#academy"
+          photo={photoCredits.frontsAcademy}
         />
       </div>
 
