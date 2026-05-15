@@ -54,37 +54,26 @@
       "part3": "marca, produtos e",
       "part4": "serviços."
     },
-    "intro": "Agimos no seu interesse para promover a qualidade dos seus produtos, serviços, instalações e processos — trazendo reconhecimento, competitividade e inovação para a sua operação.",
     "items": {
       "marketAccess": {
         "number": "01",
         "title": "Acesso a mercados",
-        "description": "Certificações reconhecidas internacionalmente que abrem portas, qualificam fornecedores e habilitam você nas licitações que importam."
-      },
-      "licenseToOperate": {
-        "number": "02",
-        "title": "Licença para operar",
-        "description": "Conformidade regulatória, ambiental e técnica para você sustentar a operação sem surpresas e sem interrupção."
+        "description": "Certificações reconhecidas que abrem portas e qualificam você nas licitações que importam."
       },
       "safety": {
-        "number": "03",
+        "number": "02",
         "title": "Segurança e confiabilidade",
-        "description": "Ensaios não-destrutivos e inspeção contínua reduzem risco de falha em ativos críticos — antes que se transformem em parada."
-      },
-      "costControl": {
-        "number": "04",
-        "title": "Controle de custos",
-        "description": "Detectar o problema cedo custa fração do que custa corrigir tarde. Inspeção é margem operacional."
+        "description": "Ensaios não-destrutivos e inspeção contínua reduzem risco de falha em ativos críticos."
       },
       "innovation": {
-        "number": "05",
+        "number": "03",
         "title": "Inovação acelerada",
-        "description": "P&D, ensaios de produto e prototipagem técnica encurtam o ciclo entre ideia, validação e mercado."
+        "description": "P&D, ensaios e prototipagem técnica encurtam o ciclo entre ideia e mercado."
       },
       "reputation": {
-        "number": "06",
+        "number": "04",
         "title": "Reputação da marca",
-        "description": "Selos reconhecidos garantem que a sua entrega seja crida antes de ser provada — pelo cliente, pelo regulador e pelo mercado."
+        "description": "Selos reconhecidos garantem que sua entrega seja crida antes de ser provada."
       }
     }
   },
@@ -96,40 +85,38 @@
         "number": "01",
         "kicker": "frente · 01",
         "title": "Soluções setoriais",
-        "description": "Aconselhamento estratégico adaptado ao seu setor — óleo & gás, energia, mineração, siderurgia, infraestrutura e indústria de transformação.",
-        "cta": "Explore as soluções"
+        "description": "Aconselhamento estratégico para óleo & gás, energia, mineração, siderurgia e infraestrutura.",
+        "cta": "Explore"
       },
       "technicalServices": {
         "number": "02",
         "kicker": "frente · 02",
         "title": "Serviços técnicos",
-        "description": "Inspeção, ensaios não-destrutivos, calibração, engenharia de avaliação e laudos para a sua operação crítica.",
-        "cta": "Pedir cotação"
+        "description": "Inspeção, ensaios, calibração e laudos para a sua operação crítica.",
+        "cta": "Cotação"
       },
       "academy": {
         "number": "03",
         "kicker": "frente · 03",
         "title": "Formação & certificação",
-        "description": "Capacitação profissional em normas, métodos e certificações reconhecidas internacionalmente, via ISQ Academy.",
-        "cta": "Conhecer a Academy"
+        "description": "Capacitação profissional em normas e certificações via ISQ Academy.",
+        "cta": "Academy"
       }
     }
   },
   "stats": {
     "section": "n.04 — em números",
-    "lead": "Cinco décadas de tradição técnica em escala industrial.",
     "items": {
       "years": { "value": 20, "suffix": "+", "label": "anos de atuação no Brasil" },
       "services": { "value": 60, "suffix": "+", "label": "serviços técnicos especializados" },
       "people": { "value": 300, "suffix": "+", "label": "colaboradores multidisciplinares" }
     },
-    "footnote": "Núcleo interno de inovação tecnológica · Sistema de gestão integrado certificado · Presença nas principais comissões técnicas do país"
+    "footnote": "Núcleo de inovação · Sistema de gestão integrado · Presença nas principais comissões técnicas"
   },
   "clients": {
     "section": "n.05 — clientes",
     "lead": "Companhias que confiam",
     "leadEmph": "na ISQ.",
-    "intro": "Operamos lado a lado com líderes da indústria brasileira e internacional — em ativos críticos, certificações regulatórias e projetos de longo prazo.",
     "backdrop": "Confiança",
     "names": [
       "Vale",
@@ -156,6 +143,37 @@
     "phoneLabel": "ligue",
     "emailLabel": "escreva",
     "workWithUsLabel": "trabalhe conosco"
+  },
+  "contactForm": {
+    "title": "Falar com a ISQ",
+    "intro": "Preencha o formulário e nossa equipe retorna em até 24 horas úteis.",
+    "fields": {
+      "name": "Nome completo",
+      "email": "E-mail corporativo",
+      "company": "Empresa",
+      "phone": "Telefone (opcional)",
+      "subject": "Assunto",
+      "message": "Como podemos ajudar?",
+      "consent": "Concordo com a Política de Privacidade da ISQ Brasil e o tratamento dos meus dados conforme a LGPD."
+    },
+    "subjects": {
+      "placeholder": "Selecione",
+      "solutions": "Soluções setoriais",
+      "services": "Serviços técnicos",
+      "training": "Formação & certificação",
+      "partnership": "Parceria comercial",
+      "press": "Imprensa",
+      "other": "Outro"
+    },
+    "required": "obrigatório",
+    "submit": "Enviar mensagem",
+    "submitting": "Enviando…",
+    "successTitle": "Mensagem enviada.",
+    "successDescription": "Recebemos seu contato. Vamos retornar em até 24 horas úteis.",
+    "successCta": "Fechar",
+    "errorTitle": "Não foi possível enviar.",
+    "errorDescription": "Tente novamente em alguns instantes ou escreva direto para contato@isqbrasil.com.br.",
+    "close": "Fechar formulário"
   },
   "footer": {
     "address": "Rua Estados Unidos, 22 — Sion, Belo Horizonte/MG — CEP 30315-270",

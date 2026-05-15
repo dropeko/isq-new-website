@@ -54,37 +54,26 @@
       "part3": "marca, productos y",
       "part4": "servicios."
     },
-    "intro": "Actuamos en tu interés para promover la calidad de tus productos, servicios, instalaciones y procesos — aportando reconocimiento, competitividad e innovación a tu operación.",
     "items": {
       "marketAccess": {
         "number": "01",
         "title": "Acceso a mercados",
-        "description": "Certificaciones reconocidas internacionalmente que abren puertas, califican proveedores y habilitan las licitaciones que importan."
-      },
-      "licenseToOperate": {
-        "number": "02",
-        "title": "Licencia para operar",
-        "description": "Cumplimiento regulatorio, ambiental y técnico para sostener la operación sin sorpresas ni interrupciones."
+        "description": "Certificaciones reconocidas que abren puertas y te habilitan en las licitaciones que importan."
       },
       "safety": {
-        "number": "03",
+        "number": "02",
         "title": "Seguridad y confiabilidad",
-        "description": "Ensayos no destructivos e inspección continua reducen el riesgo de fallo en activos críticos — antes de que se traduzca en parada."
-      },
-      "costControl": {
-        "number": "04",
-        "title": "Control de costos",
-        "description": "Detectar el problema temprano cuesta una fracción de lo que cuesta corregirlo tarde. La inspección es margen operativo."
+        "description": "Ensayos no destructivos e inspección continua reducen el riesgo de fallo en activos críticos."
       },
       "innovation": {
-        "number": "05",
+        "number": "03",
         "title": "Innovación acelerada",
-        "description": "I+D, ensayos de producto y prototipado técnico acortan el ciclo entre idea, validación y mercado."
+        "description": "I+D, ensayos y prototipado técnico acortan el ciclo entre idea y mercado."
       },
       "reputation": {
-        "number": "06",
+        "number": "04",
         "title": "Reputación de marca",
-        "description": "Sellos reconocidos garantizan que tu entrega sea creída antes de ser probada — por cliente, regulador y mercado."
+        "description": "Sellos reconocidos garantizan que tu entrega sea creída antes de ser probada."
       }
     }
   },
@@ -96,40 +85,38 @@
         "number": "01",
         "kicker": "frente · 01",
         "title": "Soluciones sectoriales",
-        "description": "Asesoría estratégica adaptada a tu sector — petróleo y gas, energía, minería, siderurgia, infraestructura e industria manufacturera.",
-        "cta": "Explorar las soluciones"
+        "description": "Asesoría estratégica para petróleo y gas, energía, minería, siderurgia e infraestructura.",
+        "cta": "Explorar"
       },
       "technicalServices": {
         "number": "02",
         "kicker": "frente · 02",
         "title": "Servicios técnicos",
-        "description": "Inspección, ensayos no destructivos, calibración, ingeniería de evaluación y dictámenes para tu operación crítica.",
-        "cta": "Solicitar cotización"
+        "description": "Inspección, ensayos, calibración y dictámenes para tu operación crítica.",
+        "cta": "Cotización"
       },
       "academy": {
         "number": "03",
         "kicker": "frente · 03",
         "title": "Formación y certificación",
-        "description": "Capacitación profesional en normas, métodos y certificaciones reconocidas internacionalmente, vía ISQ Academy.",
-        "cta": "Conocer la Academy"
+        "description": "Capacitación profesional en normas y certificaciones vía ISQ Academy.",
+        "cta": "Academy"
       }
     }
   },
   "stats": {
     "section": "n.04 — en números",
-    "lead": "Cinco décadas de tradición técnica a escala industrial.",
     "items": {
       "years": { "value": 20, "suffix": "+", "label": "años de actuación en Brasil" },
       "services": { "value": 60, "suffix": "+", "label": "servicios técnicos especializados" },
       "people": { "value": 300, "suffix": "+", "label": "colaboradores multidisciplinares" }
     },
-    "footnote": "Núcleo interno de innovación tecnológica · Sistema de gestión integrado certificado · Presencia en las principales comisiones técnicas del país"
+    "footnote": "Núcleo de innovación · Sistema de gestión integrado · Presencia en las principales comisiones técnicas"
   },
   "clients": {
     "section": "n.05 — clientes",
     "lead": "Compañías que confían",
     "leadEmph": "en ISQ.",
-    "intro": "Operamos junto a líderes de la industria brasileña e internacional — en activos críticos, certificaciones regulatorias y proyectos de largo plazo.",
     "backdrop": "Confianza",
     "names": [
       "Vale",
@@ -156,6 +143,37 @@
     "phoneLabel": "llama",
     "emailLabel": "escribe",
     "workWithUsLabel": "trabaja con nosotros"
+  },
+  "contactForm": {
+    "title": "Hablar con ISQ",
+    "intro": "Completa el formulario y nuestro equipo te responde en hasta 24 horas hábiles.",
+    "fields": {
+      "name": "Nombre completo",
+      "email": "E-mail corporativo",
+      "company": "Empresa",
+      "phone": "Teléfono (opcional)",
+      "subject": "Asunto",
+      "message": "¿Cómo podemos ayudarte?",
+      "consent": "Acepto la Política de Privacidad de ISQ Brasil y el tratamiento de mis datos."
+    },
+    "subjects": {
+      "placeholder": "Selecciona",
+      "solutions": "Soluciones sectoriales",
+      "services": "Servicios técnicos",
+      "training": "Formación y certificación",
+      "partnership": "Alianza comercial",
+      "press": "Prensa",
+      "other": "Otro"
+    },
+    "required": "obligatorio",
+    "submit": "Enviar mensaje",
+    "submitting": "Enviando…",
+    "successTitle": "Mensaje enviado.",
+    "successDescription": "Recibimos tu mensaje. Te contestamos en hasta 24 horas hábiles.",
+    "successCta": "Cerrar",
+    "errorTitle": "No fue posible enviar.",
+    "errorDescription": "Inténtalo de nuevo o escribe a contato@isqbrasil.com.br.",
+    "close": "Cerrar formulario"
   },
   "footer": {
     "address": "Rua Estados Unidos, 22 — Sion, Belo Horizonte/MG — 30315-270",
