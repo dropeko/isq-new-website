@@ -54,37 +54,26 @@
       "part3": "brand, products and",
       "part4": "services."
     },
-    "intro": "We act on your behalf to promote the quality of your products, services, facilities and processes — bringing recognition, competitiveness and innovation to your operation.",
     "items": {
       "marketAccess": {
         "number": "01",
         "title": "Market access",
-        "description": "Internationally recognized certifications open doors, qualify suppliers and unlock the tenders that matter."
-      },
-      "licenseToOperate": {
-        "number": "02",
-        "title": "License to operate",
-        "description": "Regulatory, environmental and technical compliance so you can sustain operations without surprises or downtime."
+        "description": "Recognized certifications that open doors and qualify you for the tenders that matter."
       },
       "safety": {
-        "number": "03",
+        "number": "02",
         "title": "Safety and reliability",
-        "description": "Non-destructive testing and continuous inspection cut failure risk on critical assets — before it becomes a shutdown."
-      },
-      "costControl": {
-        "number": "04",
-        "title": "Cost control",
-        "description": "Catching a problem early costs a fraction of fixing it late. Inspection is operating margin."
+        "description": "Non-destructive testing and continuous inspection cut failure risk on critical assets."
       },
       "innovation": {
-        "number": "05",
+        "number": "03",
         "title": "Accelerated innovation",
-        "description": "R&D, product testing and technical prototyping shorten the cycle from idea to validation to market."
+        "description": "R&D, testing and prototyping shorten the cycle from idea to market."
       },
       "reputation": {
-        "number": "06",
+        "number": "04",
         "title": "Brand reputation",
-        "description": "Recognized seals make sure your delivery is trusted before it is even tested — by client, regulator and market."
+        "description": "Recognized seals make sure your delivery is trusted before it is even tested."
       }
     }
   },
@@ -96,40 +85,38 @@
         "number": "01",
         "kicker": "front · 01",
         "title": "Sector solutions",
-        "description": "Strategic guidance tailored to your sector — oil & gas, energy, mining, steel, infrastructure and manufacturing.",
-        "cta": "Explore the solutions"
+        "description": "Strategic guidance for oil & gas, energy, mining, steel and infrastructure.",
+        "cta": "Explore"
       },
       "technicalServices": {
         "number": "02",
         "kicker": "front · 02",
         "title": "Technical services",
-        "description": "Inspection, non-destructive testing, calibration, engineering assessment and technical reports for your critical operation.",
-        "cta": "Request a quote"
+        "description": "Inspection, testing, calibration and reports for your critical operation.",
+        "cta": "Quote"
       },
       "academy": {
         "number": "03",
         "kicker": "front · 03",
         "title": "Training & certification",
-        "description": "Professional training on standards, methods and internationally recognized certifications through ISQ Academy.",
-        "cta": "Discover the Academy"
+        "description": "Professional training on standards and certifications via ISQ Academy.",
+        "cta": "Academy"
       }
     }
   },
   "stats": {
     "section": "n.04 — in numbers",
-    "lead": "Five decades of technical tradition at industrial scale.",
     "items": {
       "years": { "value": 20, "suffix": "+", "label": "years operating in Brazil" },
       "services": { "value": 60, "suffix": "+", "label": "specialized technical services" },
       "people": { "value": 300, "suffix": "+", "label": "multidisciplinary professionals" }
     },
-    "footnote": "Internal technology innovation hub · Certified integrated management system · Active in the country's leading technical committees"
+    "footnote": "Internal innovation hub · Certified integrated management system · Active in the country's leading technical committees"
   },
   "clients": {
     "section": "n.05 — clients",
     "lead": "Companies that trust",
     "leadEmph": "ISQ.",
-    "intro": "We operate alongside leaders of Brazilian and global industry — on critical assets, regulatory certifications and long-term programmes.",
     "backdrop": "Trust",
     "names": [
       "Vale",
@@ -156,6 +143,37 @@
     "phoneLabel": "call",
     "emailLabel": "email",
     "workWithUsLabel": "careers"
+  },
+  "contactForm": {
+    "title": "Talk to ISQ",
+    "intro": "Fill in the form and our team will get back within 24 business hours.",
+    "fields": {
+      "name": "Full name",
+      "email": "Business email",
+      "company": "Company",
+      "phone": "Phone (optional)",
+      "subject": "Topic",
+      "message": "How can we help?",
+      "consent": "I agree with ISQ Brasil's Privacy Policy and the processing of my data."
+    },
+    "subjects": {
+      "placeholder": "Select",
+      "solutions": "Sector solutions",
+      "services": "Technical services",
+      "training": "Training & certification",
+      "partnership": "Business partnership",
+      "press": "Press",
+      "other": "Other"
+    },
+    "required": "required",
+    "submit": "Send message",
+    "submitting": "Sending…",
+    "successTitle": "Message sent.",
+    "successDescription": "We received your message and will get back within 24 business hours.",
+    "successCta": "Close",
+    "errorTitle": "Could not send.",
+    "errorDescription": "Please try again or write directly to contato@isqbrasil.com.br.",
+    "close": "Close form"
   },
   "footer": {
     "address": "Rua Estados Unidos, 22 — Sion, Belo Horizonte/MG — 30315-270",

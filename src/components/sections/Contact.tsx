@@ -1,8 +1,10 @@
 "use client";
 
+import { useState } from "react";
 import { motion, type Variants } from "motion/react";
 import { useTranslations } from "next-intl";
 import Container from "@/components/ui/Container";
+import ContactFormModal from "@/components/contact/ContactFormModal";
 
 const containerVariants: Variants = {
   hidden: {},
@@ -58,6 +60,7 @@ function Line({
 export default function Contact() {
   const t = useTranslations("contact");
   const tFooter = useTranslations("footer");
+  const [open, setOpen] = useState(false);
 
   return (
     <section
@@ -112,8 +115,9 @@ export default function Contact() {
               variants={fadeVariants}
               className="mt-14 flex flex-col items-start gap-8 lg:mt-20"
             >
-              <a
-                href={`mailto:${tFooter("email")}`}
+              <button
+                type="button"
+                onClick={() => setOpen(true)}
                 className="group inline-flex items-center gap-4 rounded-full bg-isq-navy px-8 py-5 text-sm font-semibold uppercase tracking-[0.18em] text-isq-off transition-[transform,background] duration-500 hover:-translate-y-0.5 hover:bg-isq-red"
               >
                 {t("cta")}
@@ -123,7 +127,7 @@ export default function Contact() {
                 >
                   →
                 </span>
-              </a>
+              </button>
 
               <span className="text-[11px] uppercase tracking-[0.28em] text-isq-navy/45">
                 {t("or")}
@@ -175,6 +179,8 @@ export default function Contact() {
       >
         06
       </span>
+
+      <ContactFormModal open={open} onOpenChange={setOpen} />
     </section>
   );
 }

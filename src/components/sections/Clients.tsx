@@ -89,15 +89,6 @@ export default function Clients() {
                 {t("leadEmph")}
               </strong>
             </motion.h2>
-            <motion.p
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.5 }}
-              variants={fadeVariants}
-              className="mt-8 max-w-2xl text-base leading-relaxed text-isq-navy/65 sm:text-[17px]"
-            >
-              {t("intro")}
-            </motion.p>
           </div>
         </div>
 

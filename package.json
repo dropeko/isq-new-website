@@ -10,6 +10,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@radix-ui/react-dialog": "^1.1.15",
     "clsx": "^2.1.1",
     "gsap": "^3.12.5",
     "lenis": "^1.1.20",

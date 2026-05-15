@@ -38,31 +38,16 @@ export default function Stats() {
       />
 
       <Container>
-        {/* Intro */}
-        <div className="grid grid-cols-12 gap-y-10">
-          <div className="col-span-12 lg:col-span-2">
-            <motion.span
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.6 }}
-              variants={fadeVariants}
-              className="block text-[10px] font-medium uppercase tracking-[0.32em] text-isq-red"
-            >
-              {t("section")}
-            </motion.span>
-          </div>
-          <div className="col-span-12 lg:col-span-10 lg:pl-4">
-            <motion.p
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.5 }}
-              variants={fadeVariants}
-              className="max-w-3xl font-serif text-[clamp(1.4rem,2.6vw,2.4rem)] leading-[1.18] tracking-[-0.01em] text-isq-navy/80"
-            >
-              {t("lead")}
-            </motion.p>
-          </div>
-        </div>
+        {/* Eyebrow apenas — texto removido para deixar os números falarem */}
+        <motion.span
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.6 }}
+          variants={fadeVariants}
+          className="block text-[10px] font-medium uppercase tracking-[0.32em] text-isq-red"
+        >
+          {t("section")}
+        </motion.span>
 
         {/* Big numbers */}
         <motion.div
@@ -70,7 +55,7 @@ export default function Stats() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
           variants={containerVariants}
-          className="mt-[clamp(4rem,10vw,8rem)] grid grid-cols-12 gap-x-8 gap-y-16"
+          className="mt-[clamp(3rem,6vw,5rem)] grid grid-cols-12 gap-x-8 gap-y-16"
         >
           {(["years", "services", "people"] as const).map((key, idx) => {
             const it = items[key];
