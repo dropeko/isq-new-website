@@ -28,7 +28,7 @@ export default function ImageBreak() {
       aria-label="Pausa visual — refinaria"
       className="relative isolate w-full overflow-hidden bg-isq-navy"
     >
-      <div className="relative h-[clamp(22rem,58vw,40rem)] w-full">
+      <div className="relative h-[clamp(16rem,34vw,26rem)] w-full">
         <motion.div style={{ y }} className="absolute inset-[-6%]">
           <Image
             src={credit.src}

@@ -56,7 +56,7 @@ export default function FrontEntry({
       <div
         className={clsx(
           "relative mx-auto grid w-full max-w-[110rem] grid-cols-12 items-center",
-          "gap-y-4 gap-x-6 px-[var(--container-px)] py-10 sm:py-14 lg:py-16",
+          "gap-y-4 gap-x-6 px-[var(--container-px)] py-8 sm:py-10 lg:py-12",
         )}
       >
         {/* Kicker */}

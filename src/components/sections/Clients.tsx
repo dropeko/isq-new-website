@@ -49,11 +49,12 @@ const backdropVariants: Variants = {
 export default function Clients() {
   const t = useTranslations("clients");
   const names = t.raw("names") as string[];
+  const sectors = t.raw("sectors") as string[];
 
   return (
     <section
       aria-label="Clientes"
-      className="relative isolate overflow-hidden bg-isq-off py-[clamp(7rem,14vw,12rem)]"
+      className="relative isolate overflow-hidden bg-isq-off py-[clamp(4.5rem,9vw,7.5rem)]"
     >
       <span
         aria-hidden
@@ -89,11 +90,31 @@ export default function Clients() {
                 {t("leadEmph")}
               </strong>
             </motion.h2>
+
+            {/* Chips de setor — preenchem o vazio abaixo da headline,
+                reforçam o escopo de atuação antes da lista de nomes */}
+            <motion.ul
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.5 }}
+              variants={containerVariants}
+              className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-2"
+            >
+              {sectors.map((sector) => (
+                <motion.li
+                  key={sector}
+                  variants={itemVariants}
+                  className="inline-flex items-center rounded-full border border-isq-navy/15 px-3.5 py-1.5 text-[11px] uppercase tracking-[0.18em] text-isq-navy/65 transition-colors hover:border-isq-navy/35 hover:text-isq-navy"
+                >
+                  {sector}
+                </motion.li>
+              ))}
+            </motion.ul>
           </div>
         </div>
 
         {/* Lista de clientes com "Confiança" gigante como backdrop */}
-        <div className="relative mt-[clamp(4rem,10vw,8rem)]">
+        <div className="relative mt-[clamp(3rem,6vw,5rem)]">
           {/* Backdrop word — Fraunces italic gigante, levemente rotacionado */}
           <motion.span
             initial="hidden"

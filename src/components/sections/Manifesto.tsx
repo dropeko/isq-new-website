@@ -64,7 +64,7 @@ export default function Manifesto() {
   return (
     <section
       aria-label="Manifesto"
-      className="relative isolate overflow-hidden bg-isq-off py-[clamp(7rem,16vw,14rem)] text-isq-navy"
+      className="relative isolate overflow-hidden bg-isq-off py-[clamp(4.5rem,10vw,8rem)] text-isq-navy"
     >
       {/* Hairline superior — divisor sutil que sinaliza nova seção sem
           quebrar a continuidade off-white com o hero */}
@@ -105,6 +105,14 @@ export default function Manifesto() {
             variants={containerVariants}
             className="col-span-12 lg:col-span-10 lg:pl-4"
           >
+            {/* Meta editorial top-right — preenche o canto vazio acima do headline */}
+            <div className="mb-4 hidden items-baseline justify-end gap-2 lg:flex">
+              <span aria-hidden className="h-px w-10 bg-isq-navy/20" />
+              <span className="text-[10px] uppercase tracking-[0.28em] text-isq-navy/45">
+                {t("meta")}
+              </span>
+            </div>
+
             <h2 className="font-serif tracking-[-0.02em] text-[clamp(2.25rem,6vw,6rem)] leading-[1.02]">
               <Line className="font-sans font-extralight text-isq-navy/45">
                 {t("line1")}{" "}
@@ -135,7 +143,7 @@ export default function Manifesto() {
             {/* Assinatura editorial */}
             <motion.div
               variants={fadeUpVariants}
-              className="mt-14 flex max-w-2xl items-start gap-5 lg:mt-20"
+              className="mt-10 flex max-w-2xl items-start gap-5 lg:mt-14"
             >
               <span
                 aria-hidden

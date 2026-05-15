@@ -69,7 +69,7 @@ export default function Pillars() {
   return (
     <section
       aria-label="Pilares"
-      className="relative isolate overflow-hidden bg-isq-off py-[clamp(7rem,14vw,12rem)]"
+      className="relative isolate overflow-hidden bg-isq-off py-[clamp(4.5rem,9vw,7.5rem)]"
     >
       {/* Hairline superior — divisor sutil entre seções off-white */}
       <span
@@ -93,6 +93,14 @@ export default function Pillars() {
           </div>
 
           <div className="col-span-12 lg:col-span-10 lg:pl-4">
+            {/* Meta editorial top-right */}
+            <div className="mb-4 hidden items-baseline justify-end gap-2 lg:flex">
+              <span aria-hidden className="h-px w-10 bg-isq-navy/20" />
+              <span className="text-[10px] uppercase tracking-[0.28em] text-isq-navy/45">
+                {t("meta")}
+              </span>
+            </div>
+
             <motion.h2
               initial="hidden"
               whileInView="visible"
@@ -117,7 +125,7 @@ export default function Pillars() {
         </div>
 
         {/* 4 cards scattered — col-span e offsets diferentes por item */}
-        <div className="mt-[clamp(4rem,10vw,9rem)] grid grid-cols-12 gap-x-8 gap-y-16 lg:gap-y-20">
+        <div className="mt-[clamp(3rem,6vw,5rem)] grid grid-cols-12 gap-x-8 gap-y-12 lg:gap-y-14">
           <PillarCard
             number={items.marketAccess.number}
             title={items.marketAccess.title}
@@ -128,19 +136,19 @@ export default function Pillars() {
             number={items.safety.number}
             title={items.safety.title}
             description={items.safety.description}
-            className="col-span-12 lg:col-span-5 lg:col-start-8 lg:mt-24"
+            className="col-span-12 lg:col-span-5 lg:col-start-8 lg:mt-12"
           />
           <PillarCard
             number={items.innovation.number}
             title={items.innovation.title}
             description={items.innovation.description}
-            className="col-span-12 lg:col-span-6 lg:col-start-1 lg:mt-12"
+            className="col-span-12 lg:col-span-6 lg:col-start-1 lg:mt-6"
           />
           <PillarCard
             number={items.reputation.number}
             title={items.reputation.title}
             description={items.reputation.description}
-            className="col-span-12 lg:col-span-5 lg:col-start-8 lg:mt-32"
+            className="col-span-12 lg:col-span-5 lg:col-start-8 lg:mt-16"
           />
         </div>
       </Container>

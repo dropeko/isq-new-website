@@ -30,7 +30,7 @@ export default function Stats() {
   return (
     <section
       aria-label="Em números"
-      className="relative isolate overflow-hidden bg-isq-off pt-[clamp(7rem,14vw,12rem)] pb-[clamp(6rem,12vw,10rem)]"
+      className="relative isolate overflow-hidden bg-isq-off pt-[clamp(4.5rem,9vw,7.5rem)] pb-[clamp(4rem,8vw,6.5rem)]"
     >
       <span
         aria-hidden
@@ -55,7 +55,7 @@ export default function Stats() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
           variants={containerVariants}
-          className="mt-[clamp(3rem,6vw,5rem)] grid grid-cols-12 gap-x-8 gap-y-16"
+          className="mt-[clamp(2.5rem,5vw,4rem)] grid grid-cols-12 gap-x-8 gap-y-12"
         >
           {(["years", "services", "people"] as const).map((key, idx) => {
             const it = items[key];
@@ -65,8 +65,8 @@ export default function Stats() {
                 variants={fadeVariants}
                 className={[
                   "col-span-12 sm:col-span-6 lg:col-span-4",
-                  idx === 1 && "lg:mt-12",
-                  idx === 2 && "lg:mt-6",
+                  idx === 1 && "lg:mt-8",
+                  idx === 2 && "lg:mt-4",
                 ]
                   .filter(Boolean)
                   .join(" ")}
@@ -98,7 +98,7 @@ export default function Stats() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.4 }}
           variants={fadeVariants}
-          className="mt-[clamp(4rem,8vw,6rem)] grid grid-cols-12 gap-x-8 gap-y-8 border-t border-isq-navy/10 pt-10"
+          className="mt-[clamp(3rem,5vw,4.5rem)] grid grid-cols-12 gap-x-8 gap-y-6 border-t border-isq-navy/10 pt-8"
         >
           <p className="col-span-12 flex items-start gap-4 text-xs uppercase tracking-[0.22em] text-isq-navy/55 sm:text-[13px] lg:col-span-8">
             <span
