@@ -201,13 +201,6 @@ export default function Contact() {
         </div>
       </Container>
 
-      <span
-        aria-hidden
-        className="pointer-events-none absolute bottom-[-2vw] left-[-1vw] select-none font-serif text-[20vw] leading-none text-isq-navy/[0.04]"
-      >
-        06
-      </span>
-
       <ContactFormModal open={open} onOpenChange={setOpen} />
     </section>
   );

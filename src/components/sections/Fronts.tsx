@@ -116,14 +116,6 @@ export default function Fronts() {
           photo={photoCredits.frontsAcademy}
         />
       </div>
-
-      {/* "03" decorativo no canto inferior direito */}
-      <span
-        aria-hidden
-        className="pointer-events-none absolute bottom-[-2vw] right-[-1vw] select-none font-serif text-[20vw] leading-none text-isq-navy/[0.04]"
-      >
-        03
-      </span>
     </section>
   );
 }

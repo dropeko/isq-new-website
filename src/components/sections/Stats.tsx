@@ -112,14 +112,6 @@ export default function Stats() {
           </div>
         </motion.div>
       </Container>
-
-      {/* "04" decorativo no canto inferior esquerdo */}
-      <span
-        aria-hidden
-        className="pointer-events-none absolute bottom-[-2vw] left-[-1vw] select-none font-serif text-[20vw] leading-none text-isq-navy/[0.04]"
-      >
-        04
-      </span>
     </section>
   );
 }
