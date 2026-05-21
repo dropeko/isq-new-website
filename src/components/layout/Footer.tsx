@@ -39,6 +39,24 @@ export default function Footer() {
                 {t("email")}
               </a>
             </div>
+            <div className="flex items-center gap-3">
+              <a
+                href="https://www.linkedin.com/company/isq-brasil/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="ISQ Brasil no LinkedIn"
+                className="group inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-isq-off transition-[color,border-color,background-color] duration-300 hover:border-isq-red hover:bg-isq-red hover:text-isq-off"
+              >
+                <svg
+                  aria-hidden
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="h-[18px] w-[18px]"
+                >
+                  <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z" />
+                </svg>
+              </a>
+            </div>
           </div>
 
           <nav
