@@ -64,7 +64,7 @@ export default function Manifesto() {
   return (
     <section
       aria-label="Manifesto"
-      className="relative isolate overflow-hidden bg-isq-off py-[clamp(4.5rem,10vw,8rem)] text-isq-navy"
+      className="relative isolate overflow-hidden bg-isq-off py-[clamp(3.5rem,7.5vw,6rem)] text-isq-navy"
     >
       {/* Hairline superior — divisor sutil que sinaliza nova seção sem
           quebrar a continuidade off-white com o hero */}
@@ -74,7 +74,7 @@ export default function Manifesto() {
       />
 
       <Container className="relative">
-        <div className="grid grid-cols-12 gap-y-12">
+        <div className="grid grid-cols-12 gap-y-10">
           {/* Rail blueprint à esquerda — continuidade com o overlay técnico do hero */}
           <div className="col-span-12 lg:col-span-2">
             <motion.div
@@ -113,7 +113,7 @@ export default function Manifesto() {
               </span>
             </div>
 
-            <h2 className="font-serif tracking-[-0.02em] text-[clamp(2.25rem,6vw,6rem)] leading-[1.02]">
+            <h2 className="font-serif tracking-[-0.02em] text-[clamp(2rem,5vw,4.75rem)] leading-[1.02]">
               <Line className="font-sans font-extralight text-isq-navy/45">
                 {t("line1")}{" "}
                 <em className="font-serif italic font-normal text-isq-navy">
@@ -143,7 +143,7 @@ export default function Manifesto() {
             {/* Assinatura editorial */}
             <motion.div
               variants={fadeUpVariants}
-              className="mt-10 flex max-w-2xl items-start gap-5 lg:mt-14"
+              className="mt-8 flex max-w-2xl items-start gap-5 lg:mt-10"
             >
               <span
                 aria-hidden
