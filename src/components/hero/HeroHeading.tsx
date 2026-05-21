@@ -42,7 +42,7 @@ export default function HeroHeading() {
   const t = useTranslations("hero");
 
   return (
-    <div className="flex flex-col gap-10">
+    <div className="flex flex-col gap-7 sm:gap-8">
       <motion.span
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
@@ -56,7 +56,7 @@ export default function HeroHeading() {
         initial="hidden"
         animate="visible"
         variants={containerVariants}
-        className="font-serif text-[clamp(2.75rem,7.2vw,7rem)] leading-[0.95] tracking-[-0.02em] text-isq-navy"
+        className="font-serif text-[clamp(2.5rem,6.2vw,5.75rem)] leading-[0.95] tracking-[-0.02em] text-isq-navy"
       >
         <span className="block">
           <Word>

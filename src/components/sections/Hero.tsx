@@ -19,7 +19,7 @@ export default function Hero() {
   return (
     <section
       aria-label="Hero"
-      className="relative isolate overflow-hidden pt-[120px] pb-[var(--section-py)]"
+      className="relative isolate overflow-hidden pt-[clamp(5.5rem,8vw,6.5rem)] pb-[clamp(3.5rem,7vw,6rem)]"
     >
       <div className="mx-auto grid max-w-[110rem] grid-cols-1 gap-12 px-[var(--container-px)] lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
         <div className="flex items-center">
