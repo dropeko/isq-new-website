@@ -1,33 +1,39 @@
 "use client";
 
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "motion/react";
 import HeroHeading from "@/components/hero/HeroHeading";
 import HeroVisual from "@/components/hero/HeroVisual";
 
-/**
- * Hero da home — Fase 1.1
- *
- * Animações:
- *  - Headline com reveal por palavra (motion)
- *  - Visual com clip-path reveal (motion)
- *  - Overlay técnico desenhando linhas de cota (SVG stroke-dasharray via motion)
- *
- * A transição de fundo body que existia anteriormente foi removida na revisão
- * de identidade visual: off-white é a cor predominante do site (institucional)
- * e o navy fica reservado para footer e accents.
- */
 export default function Hero() {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+  const visualY = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
+  const headingY = useTransform(scrollYProgress, [0, 1], ["0%", "-8%"]);
+  const fade = useTransform(scrollYProgress, [0, 0.85], [1, 0.35]);
+
   return (
     <section
+      ref={ref}
       aria-label="Hero"
       className="relative isolate overflow-hidden pt-[clamp(5.5rem,8vw,6.5rem)] pb-[clamp(3.5rem,7vw,6rem)]"
     >
       <div className="mx-auto grid max-w-[110rem] grid-cols-1 gap-12 px-[var(--container-px)] lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
-        <div className="flex items-center">
+        <motion.div
+          style={{ y: headingY, opacity: fade }}
+          className="flex items-center will-change-transform"
+        >
           <HeroHeading />
-        </div>
-        <div className="flex items-center">
+        </motion.div>
+        <motion.div
+          style={{ y: visualY }}
+          className="flex items-center will-change-transform"
+        >
           <HeroVisual />
-        </div>
+        </motion.div>
       </div>
 
       <div className="pointer-events-none absolute inset-x-0 bottom-8 flex justify-center">
