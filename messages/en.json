@@ -110,9 +110,21 @@
   "stats": {
     "section": "n.04 — in numbers",
     "items": {
-      "years": { "value": 20, "suffix": "+", "label": "years operating in Brazil" },
-      "services": { "value": 60, "suffix": "+", "label": "specialized technical services" },
-      "people": { "value": 300, "suffix": "+", "label": "multidisciplinary professionals" }
+      "years": {
+        "value": 20,
+        "suffix": "+",
+        "label": "years operating in Brazil"
+      },
+      "services": {
+        "value": 60,
+        "suffix": "+",
+        "label": "specialized technical services"
+      },
+      "people": {
+        "value": 300,
+        "suffix": "+",
+        "label": "multidisciplinary professionals"
+      }
     },
     "footnote": "Internal innovation hub · Certified integrated management system · Active in the country's leading technical committees"
   },
@@ -120,7 +132,14 @@
     "section": "n.05 — clients",
     "lead": "Companies that trust",
     "leadEmph": "ISQ.",
-    "sectors": ["Oil & gas", "Energy", "Mining", "Steel", "Infrastructure", "Manufacturing"],
+    "sectors": [
+      "Oil & gas",
+      "Energy",
+      "Mining",
+      "Steel",
+      "Infrastructure",
+      "Manufacturing"
+    ],
     "names": [
       "Vale",
       "Usiminas",
@@ -185,5 +204,8 @@
     "email": "contato@isqbrasil.com.br",
     "rights": "© {year} ISQ Brasil. All rights reserved.",
     "privacy": "Privacy Policy"
+  },
+  "intro": {
+    "hint": "scroll to reveal"
   }
 }

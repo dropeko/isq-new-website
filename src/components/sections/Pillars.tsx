@@ -44,19 +44,26 @@ function LeadLine({
 }
 
 type PillarItem = { number: string; title: string; description: string };
-type FanPosition = { x: number; y: number; rotate: number; baseZ: number };
+type FanPosition = { x: string; y: number; rotate: number; baseZ: number };
 
 /**
  * Posições do leque de 4 cartas. Pivot no canto inferior central
  * (transform-origin 50% 100%) — simula uma mão de baralho. As cartas
  * externas têm rotação e Y maiores para criar o arco natural; as
  * internas ficam quase verticais e ligeiramente acima.
+ *
+ * x usa calc(-50% ± Xvw) para combinar:
+ *  · -50% : autocentralização do card (cancela sua própria largura)
+ *  · ±Xvw : offset do leque, proporcional à viewport — em telas largas
+ *            o leque abre; em telas estreitas, se aperta.
+ * Esse padrão evita conflito entre centralização (left:50%) e o
+ * offset do leque, e mantém tudo num único motion.div.
  */
 const FAN_POSITIONS: FanPosition[] = [
-  { x: -260, y: 78, rotate: -14, baseZ: 1 },
-  { x: -88, y: 12, rotate: -5, baseZ: 2 },
-  { x: 88, y: 12, rotate: 5, baseZ: 2 },
-  { x: 260, y: 78, rotate: 14, baseZ: 1 },
+  { x: "calc(-50% - 19vw)", y: 70, rotate: -13, baseZ: 1 },
+  { x: "calc(-50% - 6.5vw)", y: 10, rotate: -4.5, baseZ: 2 },
+  { x: "calc(-50% + 6.5vw)", y: 10, rotate: 4.5, baseZ: 2 },
+  { x: "calc(-50% + 19vw)", y: 70, rotate: 13, baseZ: 1 },
 ];
 
 /**
@@ -136,7 +143,9 @@ export default function Pillars() {
         </div>
       </Container>
 
-      {/* Desktop: leque de 4 cartas */}
+      {/* Desktop: leque de 4 cartas. Altura da seção em clamp para
+          escalar com viewport — mais baixa que antes (640 fixo) pra dar
+          mais protagonismo às cartas. */}
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -144,13 +153,11 @@ export default function Pillars() {
         variants={{
           visible: { transition: { staggerChildren: 0.15, delayChildren: 0.1 } },
         }}
-        className="relative mx-auto mt-[clamp(3rem,6vw,5rem)] hidden h-[640px] w-full max-w-[1200px] lg:block"
+        className="relative mx-auto mt-[clamp(3rem,6vw,5rem)] hidden h-[clamp(33rem,40vw,38rem)] w-full max-w-[1320px] lg:block"
       >
-        <div className="absolute inset-x-0 bottom-12 flex justify-center">
-          {order.map((item, i) => (
-            <FanCard key={item.number} item={item} position={FAN_POSITIONS[i]} />
-          ))}
-        </div>
+        {order.map((item, i) => (
+          <FanCard key={item.number} item={item} position={FAN_POSITIONS[i]} />
+        ))}
       </motion.div>
 
       {/* Mobile: empilhadas */}
@@ -198,18 +205,18 @@ function FanCard({
     <motion.div
       variants={variants}
       whileHover={{
-        y: position.y - 64,
+        y: position.y - 56,
         rotate: 0,
-        scale: 1.04,
+        scale: 1.05,
+        zIndex: 20,
         transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
       }}
       style={{
         transformOrigin: "50% 100%",
         zIndex: position.baseZ,
         left: "50%",
-        marginLeft: "-9rem", // metade da largura (18rem)
       }}
-      className="group absolute bottom-0 block w-[18rem] hover:z-20"
+      className="group absolute bottom-16 block w-[clamp(19rem,23vw,23rem)]"
     >
       <CardBody item={item} />
     </motion.div>

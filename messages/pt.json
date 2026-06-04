@@ -110,9 +110,21 @@
   "stats": {
     "section": "n.04 — em números",
     "items": {
-      "years": { "value": 20, "suffix": "+", "label": "anos de atuação no Brasil" },
-      "services": { "value": 60, "suffix": "+", "label": "serviços técnicos especializados" },
-      "people": { "value": 300, "suffix": "+", "label": "colaboradores multidisciplinares" }
+      "years": {
+        "value": 20,
+        "suffix": "+",
+        "label": "anos de atuação no Brasil"
+      },
+      "services": {
+        "value": 60,
+        "suffix": "+",
+        "label": "serviços técnicos especializados"
+      },
+      "people": {
+        "value": 300,
+        "suffix": "+",
+        "label": "colaboradores multidisciplinares"
+      }
     },
     "footnote": "Núcleo de inovação · Sistema de gestão integrado · Presença nas principais comissões técnicas"
   },
@@ -120,7 +132,14 @@
     "section": "n.05 — clientes",
     "lead": "Companhias que confiam",
     "leadEmph": "na ISQ.",
-    "sectors": ["Óleo & gás", "Energia", "Mineração", "Siderurgia", "Infraestrutura", "Manufatura"],
+    "sectors": [
+      "Óleo & gás",
+      "Energia",
+      "Mineração",
+      "Siderurgia",
+      "Infraestrutura",
+      "Manufatura"
+    ],
     "names": [
       "Vale",
       "Usiminas",
@@ -185,5 +204,8 @@
     "email": "contato@isqbrasil.com.br",
     "rights": "© {year} ISQ Brasil. Todos os direitos reservados.",
     "privacy": "Política de Privacidade"
+  },
+  "intro": {
+    "hint": "role para revelar"
   }
 }
