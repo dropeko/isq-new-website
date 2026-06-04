@@ -11,32 +11,33 @@ import { useTranslations } from "next-intl";
  * grande. Conforme o usuário rola a página, a tela desvanece para
  * revelar o conteúdo já montado por baixo.
  *
- * Mecânica:
- *  - Posição: fixed inset-0, z-[90] (abaixo do skip-link em z-[100]).
- *  - Fade: opacity 1 → 0 nos primeiros ~520px de scrollY (ease
- *    natural via Lenis, sem easing curve adicional para preservar
- *    a sensação de "controle pelo dedo").
- *  - Scale do logo: 1 → 1.06 nos mesmos 520px, dando a sensação de
- *    "saindo de cena" pra frente.
- *  - Hint "role para revelar" some mais rápido (120px) — é uma
- *    instrução, não conteúdo.
- *  - pointer-events e visibility ficam off quando a tela está quase
- *    transparente, para não capturar cliques no conteúdo abaixo.
+ * Composição da animação do logo (3 camadas):
+ *  1. Sonar pulse rings — 2 círculos vermelhos pulsando em fase
+ *     defasada (delay 1.4s entre eles), sensação de "energia
+ *     emanando da marca". Fit com a linguagem técnica/precisão.
+ *  2. Iris reveal — clip-path circle 0% → 72% (cobertura completa de
+ *     um quadrado: raio 70.7% via teorema de Pitágoras), 1.4s na
+ *     entrada com ease cinematográfico [0.7, 0, 0.3, 1].
+ *  3. Breathing — scale 1 → 1.025 → 1 em loop de 4.5s, delay 1.5s
+ *     pra começar só depois do iris terminar.
+ *
+ * Fade do overlay: rápido (180px de scrollY) pra primeira seção
+ * ficar claramente visível assim que o usuário começa a rolar.
+ * Antes era 520px — usuário reportou que demorava demais.
  *
  * Acessibilidade:
  *  - aria-hidden no overlay: o conteúdo real é o que importa para AT.
  *  - O skip-link permanece em z-[100] (acima da intro), então usuários
  *    de teclado podem pular direto para #main sem ver a animação.
- *  - reduceMotion: a animação ainda funciona mas o tempo é o do scroll,
- *    o que respeita o ritmo do usuário (não autoplay).
  */
 export default function IntroScreen() {
   const t = useTranslations("intro");
   const { scrollY } = useScroll();
 
-  const opacity = useTransform(scrollY, [0, 520], [1, 0], { clamp: true });
-  const scale = useTransform(scrollY, [0, 520], [1, 1.06], { clamp: true });
-  const hintOpacity = useTransform(scrollY, [0, 120], [1, 0], { clamp: true });
+  // Fade rápido: 180px = ~22% de uma viewport típica
+  const opacity = useTransform(scrollY, [0, 180], [1, 0], { clamp: true });
+  const scale = useTransform(scrollY, [0, 180], [1, 1.08], { clamp: true });
+  const hintOpacity = useTransform(scrollY, [0, 60], [1, 0], { clamp: true });
   const pointerEvents = useTransform(opacity, (v) =>
     v < 0.04 ? "none" : "auto",
   );
@@ -54,14 +55,56 @@ export default function IntroScreen() {
         style={{ scale }}
         className="relative h-[78vmin] w-[78vmin] will-change-transform"
       >
-        <Image
-          src="/brand/isq-logo.svg"
-          alt=""
-          fill
-          priority
-          sizes="78vmin"
-          className="object-contain"
-        />
+        {/* Sonar pulse rings — 2 ondas defasadas */}
+        {[0, 1.4].map((delay) => (
+          <motion.span
+            key={delay}
+            aria-hidden
+            initial={{ scale: 0.92, opacity: 0 }}
+            animate={{
+              scale: [0.92, 1.12, 1.45],
+              opacity: [0, 0.45, 0],
+            }}
+            transition={{
+              duration: 2.8,
+              repeat: Infinity,
+              ease: "easeOut",
+              times: [0, 0.3, 1],
+              delay,
+            }}
+            className="absolute inset-[-12%] rounded-full border border-isq-red/45"
+          />
+        ))}
+
+        {/* Iris reveal — clip-path circular abrindo do centro */}
+        <motion.div
+          initial={{ clipPath: "circle(0% at 50% 50%)", scale: 0.96 }}
+          animate={{ clipPath: "circle(72% at 50% 50%)", scale: 1 }}
+          transition={{ duration: 1.4, ease: [0.7, 0, 0.3, 1] }}
+          className="absolute inset-0"
+        >
+          {/* Breathing — pulsação sutil em loop após o iris */}
+          <motion.div
+            initial={{ scale: 1 }}
+            animate={{ scale: [1, 1.025, 1] }}
+            transition={{
+              duration: 4.5,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 1.5,
+            }}
+            className="relative h-full w-full"
+          >
+            <Image
+              src="/brand/isq-logo.svg"
+              alt=""
+              fill
+              priority
+              sizes="78vmin"
+              className="object-contain"
+            />
+          </motion.div>
+        </motion.div>
       </motion.div>
 
       <motion.div

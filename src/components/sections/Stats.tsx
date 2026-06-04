@@ -44,21 +44,28 @@ export default function Stats() {
 
   // Janelas escalonadas dentro do progresso visível da seção. Cada número
   // tem seu próprio ramp-up, criando cascata sem snap.
+  //
+  // Calibração de timing: as janelas terminam ANTES de a seção começar
+  // a sair do topo da viewport. Com offset ["start end", "end start"],
+  // p=0.5 = seção centrada; numbers area fica plenamente visível em
+  // p ∈ [~0.26, ~0.66]. Completar todos os contadores até p=0.52
+  // garante que o usuário vê os números finais com a seção ainda
+  // bem posicionada (antes era até p=0.66 — passava da viewport).
   const yearsValue = useTransform(
     scrollYProgress,
-    [0.18, 0.5],
+    [0.18, 0.4],
     [0, items.years.value],
     { clamp: true },
   );
   const servicesValue = useTransform(
     scrollYProgress,
-    [0.26, 0.58],
+    [0.24, 0.46],
     [0, items.services.value],
     { clamp: true },
   );
   const peopleValue = useTransform(
     scrollYProgress,
-    [0.34, 0.66],
+    [0.3, 0.52],
     [0, items.people.value],
     { clamp: true },
   );
