@@ -34,10 +34,10 @@ export default function IntroScreen() {
   const t = useTranslations("intro");
   const { scrollY } = useScroll();
 
-  // Fade muito rápido: 140px ≈ 17% de viewport típica
-  const opacity = useTransform(scrollY, [0, 140], [1, 0], { clamp: true });
-  const scale = useTransform(scrollY, [0, 140], [1, 1.08], { clamp: true });
-  const hintOpacity = useTransform(scrollY, [0, 50], [1, 0], { clamp: true });
+  // Fade quase instantâneo: 90px ≈ 11% de viewport típica
+  const opacity = useTransform(scrollY, [0, 90], [1, 0], { clamp: true });
+  const scale = useTransform(scrollY, [0, 90], [1, 1.08], { clamp: true });
+  const hintOpacity = useTransform(scrollY, [0, 30], [1, 0], { clamp: true });
   const pointerEvents = useTransform(opacity, (v) =>
     v < 0.04 ? "none" : "auto",
   );
@@ -55,18 +55,18 @@ export default function IntroScreen() {
         style={{ scale }}
         className="relative h-[78vmin] w-[78vmin] will-change-transform"
       >
-        {/* Sonar pulse rings — 2 ondas defasadas, ritmo mais ágil */}
-        {[0, 0.95].map((delay) => (
+        {/* Sonar pulse rings — 2 ondas defasadas, ritmo enérgico */}
+        {[0, 0.65].map((delay) => (
           <motion.span
             key={delay}
             aria-hidden
             initial={{ scale: 0.92, opacity: 0 }}
             animate={{
               scale: [0.92, 1.12, 1.45],
-              opacity: [0, 0.5, 0],
+              opacity: [0, 0.55, 0],
             }}
             transition={{
-              duration: 1.9,
+              duration: 1.3,
               repeat: Infinity,
               ease: "easeOut",
               times: [0, 0.3, 1],
