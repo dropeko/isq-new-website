@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { useTranslations } from "next-intl";
 
@@ -8,36 +9,50 @@ import { useTranslations } from "next-intl";
  * IntroScreen — abertura "cinema" estilo Netflix.
  *
  * Renderiza uma tela preta full-viewport com a marca ISQ centralizada
- * grande. Conforme o usuário rola a página, a tela desvanece para
- * revelar o conteúdo já montado por baixo.
+ * grande. O fade é atrelado ao scroll DENTRO do IntroBuffer (componente
+ * h-screen no topo de page.tsx). Quando o usuário rola todo o buffer
+ * (100vh), o overlay vira transparente e a Hero aparece no topo da
+ * viewport sem qualquer sobreposição.
  *
- * Composição da animação do logo (3 camadas):
- *  1. Sonar pulse rings — 2 círculos vermelhos pulsando em fase
- *     defasada (delay 1.4s entre eles), sensação de "energia
- *     emanando da marca". Fit com a linguagem técnica/precisão.
- *  2. Iris reveal — clip-path circle 0% → 72% (cobertura completa de
- *     um quadrado: raio 70.7% via teorema de Pitágoras), 1.4s na
- *     entrada com ease cinematográfico [0.7, 0, 0.3, 1].
- *  3. Breathing — scale 1 → 1.025 → 1 em loop de 4.5s, delay 1.5s
- *     pra começar só depois do iris terminar.
+ * Diferença para a versão anterior: antes o fade era um range fixo em
+ * px (90/140/180/520) e terminava enquanto o usuário ainda estava no
+ * topo da Hero — sobreposição visível. Agora o range = viewport height
+ * (medido em runtime e atualizado em resize), exatamente igual ao
+ * IntroBuffer h-screen. Resultado: fade termina precisamente onde
+ * a Hero começa.
  *
- * Fade do overlay: rápido (180px de scrollY) pra primeira seção
- * ficar claramente visível assim que o usuário começa a rolar.
- * Antes era 520px — usuário reportou que demorava demais.
+ * Animação do logo (3 camadas independentes, todas no mesmo motion.div):
+ *  1. Sonar pulse rings — 2 círculos vermelhos pulsando defasados
+ *     (delay 0.65s, ritmo enérgico de 1.3s).
+ *  2. Iris reveal — clip-path circle(0%) → 72% no mount, 1.4s.
+ *  3. Breathing — scale 1 → 1.025 em loop, delay pós-iris.
  *
- * Acessibilidade:
- *  - aria-hidden no overlay: o conteúdo real é o que importa para AT.
- *  - O skip-link permanece em z-[100] (acima da intro), então usuários
- *    de teclado podem pular direto para #main sem ver a animação.
+ * Acessibilidade: aria-hidden no overlay, skip-link em z-[100] acima
+ * da intro (z-[90]) pra usuários de teclado pularem direto pra #main.
  */
 export default function IntroScreen() {
   const t = useTranslations("intro");
   const { scrollY } = useScroll();
 
-  // Fade quase instantâneo: 90px ≈ 11% de viewport típica
-  const opacity = useTransform(scrollY, [0, 90], [1, 0], { clamp: true });
-  const scale = useTransform(scrollY, [0, 90], [1, 1.08], { clamp: true });
-  const hintOpacity = useTransform(scrollY, [0, 30], [1, 0], { clamp: true });
+  // Mede a altura do viewport pra ajustar o fade ao tamanho do buffer.
+  // SSR inicia com 800 (chute razoável); cliente atualiza no mount.
+  const [vh, setVh] = useState(800);
+  useEffect(() => {
+    const update = () => setVh(window.innerHeight);
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
+  // Fade percorre os 100vh do buffer inteiros — o overlay só vira
+  // totalmente transparente quando o buffer foi 100% scrollado.
+  const opacity = useTransform(scrollY, [0, vh], [1, 0], { clamp: true });
+  const scale = useTransform(scrollY, [0, vh], [1, 1.08], { clamp: true });
+  // Hint some bem mais cedo (~25% do buffer) — é uma instrução,
+  // não conteúdo, e perde utilidade assim que o usuário começou.
+  const hintOpacity = useTransform(scrollY, [0, vh * 0.25], [1, 0], {
+    clamp: true,
+  });
   const pointerEvents = useTransform(opacity, (v) =>
     v < 0.04 ? "none" : "auto",
   );
