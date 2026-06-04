@@ -1,4 +1,5 @@
 import { setRequestLocale } from "next-intl/server";
+import IntroBuffer from "@/components/intro/IntroBuffer";
 import Hero from "@/components/sections/Hero";
 import Manifesto from "@/components/sections/Manifesto";
 import ImageBreak from "@/components/sections/ImageBreak";
@@ -18,6 +19,7 @@ export default async function HomePage({
 
   return (
     <>
+      <IntroBuffer />
       <Hero />
       <Manifesto />
       <ImageBreak />

@@ -8,6 +8,7 @@ import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 import ScrollTriggerProvider from "@/components/providers/ScrollTriggerProvider";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import IntroScreen from "@/components/intro/IntroScreen";
 import OrganizationJsonLd from "@/components/seo/OrganizationJsonLd";
 
 const fraunces = Fraunces({
@@ -99,6 +100,7 @@ export default async function LocaleLayout({
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ScrollTriggerProvider>
             <SmoothScrollProvider>
+              <IntroScreen />
               <Header />
               <main id="main">{children}</main>
               <Footer />

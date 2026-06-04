@@ -1,6 +1,12 @@
 "use client";
 
-import { motion, type Variants } from "motion/react";
+import { useRef } from "react";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  type Variants,
+} from "motion/react";
 import { useTranslations } from "next-intl";
 import Container from "@/components/ui/Container";
 import StatCounter from "@/components/stats/StatCounter";
@@ -15,11 +21,14 @@ const fadeVariants: Variants = {
   },
 };
 
-const containerVariants: Variants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.18, delayChildren: 0.1 } },
-};
-
+/**
+ * Stats — números scrubados pelo scroll. Substitui o burst de 2.2s (que
+ * disparava ao entrar 50% no viewport) por um tick contínuo: cada número
+ * "sobe" enquanto o usuário rola pela seção, em janelas escalonadas.
+ *
+ * Resultado: dá ao bloco a mesma sensação cinematográfica do manifesto e
+ * dos pilares — você "controla" o ritmo dos números com a roda.
+ */
 export default function Stats() {
   const t = useTranslations("stats");
   const items = t.raw("items") as Record<
@@ -27,8 +36,45 @@ export default function Stats() {
     { value: number; suffix: string; label: string }
   >;
 
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  // Janelas escalonadas dentro do progresso visível da seção. Cada número
+  // tem seu próprio ramp-up, criando cascata sem snap.
+  //
+  // Calibração de timing: as janelas terminam ANTES de a seção começar
+  // a sair do topo da viewport. Com offset ["start end", "end start"],
+  // p=0.5 = seção centrada; numbers area fica plenamente visível em
+  // p ∈ [~0.26, ~0.66]. Completar todos os contadores até p=0.52
+  // garante que o usuário vê os números finais com a seção ainda
+  // bem posicionada (antes era até p=0.66 — passava da viewport).
+  const yearsValue = useTransform(
+    scrollYProgress,
+    [0.18, 0.4],
+    [0, items.years.value],
+    { clamp: true },
+  );
+  const servicesValue = useTransform(
+    scrollYProgress,
+    [0.24, 0.46],
+    [0, items.services.value],
+    { clamp: true },
+  );
+  const peopleValue = useTransform(
+    scrollYProgress,
+    [0.3, 0.52],
+    [0, items.people.value],
+    { clamp: true },
+  );
+
+  const sources = { years: yearsValue, services: servicesValue, people: peopleValue };
+
   return (
     <section
+      ref={sectionRef}
       aria-label="Em números"
       className="relative isolate overflow-hidden bg-isq-off pt-[clamp(4.5rem,9vw,7.5rem)] pb-[clamp(4rem,8vw,6.5rem)]"
     >
@@ -38,7 +84,6 @@ export default function Stats() {
       />
 
       <Container>
-        {/* Eyebrow apenas — texto removido para deixar os números falarem */}
         <motion.span
           initial="hidden"
           whileInView="visible"
@@ -49,20 +94,14 @@ export default function Stats() {
           {t("section")}
         </motion.span>
 
-        {/* Big numbers */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={containerVariants}
-          className="mt-[clamp(2.5rem,5vw,4rem)] grid grid-cols-12 gap-x-8 gap-y-12"
-        >
+        {/* Big numbers — sem stagger/whileInView agora; cada item revela
+            naturalmente conforme o número começa a subir */}
+        <div className="mt-[clamp(2.5rem,5vw,4rem)] grid grid-cols-12 gap-x-8 gap-y-12">
           {(["years", "services", "people"] as const).map((key, idx) => {
             const it = items[key];
             return (
-              <motion.div
+              <div
                 key={key}
-                variants={fadeVariants}
                 className={[
                   "col-span-12 sm:col-span-6 lg:col-span-4",
                   idx === 1 && "lg:mt-8",
@@ -80,6 +119,7 @@ export default function Stats() {
                     <StatCounter
                       value={it.value}
                       suffix={it.suffix}
+                      source={sources[key]}
                       className="font-serif text-[clamp(4.5rem,11vw,10rem)] leading-[0.9] tracking-[-0.04em] text-isq-navy"
                     />
                     <span className="mt-5 max-w-[22ch] text-sm uppercase leading-snug tracking-[0.18em] text-isq-navy/55">
@@ -87,12 +127,11 @@ export default function Stats() {
                     </span>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             );
           })}
-        </motion.div>
+        </div>
 
-        {/* Trust markers row — footnote textual + selo Great Place to Work */}
         <motion.div
           initial="hidden"
           whileInView="visible"
