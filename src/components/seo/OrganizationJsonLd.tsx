@@ -1,16 +1,23 @@
+import { SITE_NAME, SITE_URL } from "@/lib/seo/site";
+
 /**
  * JSON-LD Organization schema para SEO — sinaliza ao Google os dados
  * institucionais da ISQ Brasil. Renderiza um <script type="application/ld+json">
  * estático no head.
+ *
+ * O `@id` (`${SITE_URL}/#organization`) permite que outros nós do
+ * grafo de dados (WebSite, Article, etc) referenciem essa Organization
+ * via `{ "@id": ... }` ao invés de duplicar todos os campos.
  */
 export default function OrganizationJsonLd() {
   const data = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "ISQ Brasil",
-    legalName: "ISQ Brasil",
-    url: "https://isqbrasil.com.br",
-    logo: "https://isqbrasil.com.br/brand/isq-logo.svg",
+    "@id": `${SITE_URL}/#organization`,
+    name: SITE_NAME,
+    legalName: SITE_NAME,
+    url: SITE_URL,
+    logo: `${SITE_URL}/brand/isq-logo.svg`,
     foundingDate: "1965",
     description:
       "ISQ Brasil — entidade privada, independente e acreditada de engenharia, inspeção, ensaios, certificação, P&D e inovação.",

@@ -10,6 +10,8 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import IntroScreen from "@/components/intro/IntroScreen";
 import OrganizationJsonLd from "@/components/seo/OrganizationJsonLd";
+import WebSiteJsonLd from "@/components/seo/WebSiteJsonLd";
+import { SITE_URL } from "@/lib/seo/site";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -43,6 +45,7 @@ export async function generateMetadata({
     es: "es_ES",
   };
   return {
+    metadataBase: new URL(SITE_URL),
     title,
     description,
     alternates: {
@@ -51,6 +54,7 @@ export async function generateMetadata({
         "pt-BR": "/",
         "en-US": "/en",
         "es-ES": "/es",
+        "x-default": "/",
       },
     },
     openGraph: {
@@ -97,6 +101,7 @@ export default async function LocaleLayout({
           {locale === "en" ? "Skip to content" : locale === "es" ? "Saltar al contenido" : "Pular para o conteúdo"}
         </a>
         <OrganizationJsonLd />
+        <WebSiteJsonLd />
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ScrollTriggerProvider>
             <SmoothScrollProvider>
