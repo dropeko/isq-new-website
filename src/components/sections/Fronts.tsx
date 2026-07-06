@@ -12,6 +12,9 @@ import {
 import { useTranslations } from "next-intl";
 import Container from "@/components/ui/Container";
 import FrontEntry from "@/components/fronts/FrontEntry";
+import Tilt from "@/components/ui/Tilt";
+import ScanDivider from "@/components/ui/ScanDivider";
+import ChapterMarker from "@/components/ui/ChapterMarker";
 import { photoCredits, type PhotoCredit } from "@/data/photoCredits";
 
 const fadeVariants: Variants = {
@@ -125,25 +128,14 @@ export default function Fronts() {
       aria-label="Três frentes"
       className="relative bg-isq-off lg:h-[320vh]"
     >
-      <span
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 mx-auto block h-px w-full max-w-[110rem] bg-isq-navy/10"
-      />
+      <ScanDivider />
 
       <div className="relative pt-[clamp(4.5rem,8vw,7rem)] pb-0 lg:sticky lg:top-0 lg:flex lg:h-screen lg:flex-col lg:overflow-hidden lg:pb-0 lg:pt-[clamp(2.75rem,4.5vw,4.25rem)]">
         {/* Header */}
         <Container>
           <div className="grid grid-cols-12 gap-y-10">
             <div className="col-span-12 lg:col-span-2">
-              <motion.span
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.6 }}
-                variants={fadeVariants}
-                className="block text-[10px] font-medium uppercase tracking-[0.32em] text-isq-red"
-              >
-                {t("section")}
-              </motion.span>
+              <ChapterMarker section={t("section")} />
             </div>
 
             <div className="col-span-12 lg:col-span-10 lg:pl-4">
@@ -248,6 +240,7 @@ function FrontPanel({
       href={href}
       className="group relative block shrink-0 w-[clamp(28rem,68vw,62rem)]"
     >
+      <Tilt max={5} scale={1.012} perspective={1400} glare>
       <article className="grid h-full grid-cols-12 items-stretch gap-x-8">
         {/* Photo */}
         <div className="col-span-7 flex items-center">
@@ -300,6 +293,7 @@ function FrontPanel({
           </span>
         </div>
       </article>
+      </Tilt>
     </a>
   );
 }

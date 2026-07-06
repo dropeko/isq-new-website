@@ -1,8 +1,13 @@
 "use client";
 
-import { motion, type Variants } from "motion/react";
+import { useRef } from "react";
+import { motion, useScroll, type Variants } from "motion/react";
 import { useTranslations } from "next-intl";
 import Container from "@/components/ui/Container";
+import ScanDivider from "@/components/ui/ScanDivider";
+import ChapterMarker from "@/components/ui/ChapterMarker";
+import PillarsDepth from "@/components/pillars/PillarsDepth";
+import Tilt from "@/components/ui/Tilt";
 
 const containerVariants: Variants = {
   hidden: {},
@@ -79,6 +84,11 @@ const FAN_POSITIONS: FanPosition[] = [
  */
 export default function Pillars() {
   const t = useTranslations("pillars");
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
   const items = t.raw("items") as Record<string, PillarItem>;
   const order: PillarItem[] = [
     items.marketAccess,
@@ -89,26 +99,19 @@ export default function Pillars() {
 
   return (
     <section
+      ref={sectionRef}
       aria-label="Pilares"
       className="relative isolate overflow-hidden bg-isq-off pt-[clamp(4.5rem,8vw,7rem)] pb-[clamp(4rem,7vw,6rem)]"
     >
-      <span
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 mx-auto block h-px w-full max-w-[110rem] bg-isq-navy/10"
-      />
+      <ScanDivider />
 
-      <Container>
+      {/* Profundidade em camadas — "pilares" blueprint (parallax + cursor) */}
+      <PillarsDepth progress={scrollYProgress} />
+
+      <Container className="relative z-10">
         <div className="grid grid-cols-12 gap-y-10">
           <div className="col-span-12 lg:col-span-2">
-            <motion.span
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.6 }}
-              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              className="block text-[10px] font-medium uppercase tracking-[0.32em] text-isq-red"
-            >
-              {t("section")}
-            </motion.span>
+            <ChapterMarker section={t("section")} />
           </div>
 
           <div className="col-span-12 lg:col-span-10 lg:pl-4">
@@ -218,7 +221,12 @@ function FanCard({
       }}
       className="group absolute bottom-16 block w-[clamp(19rem,23vw,23rem)]"
     >
-      <CardBody item={item} />
+      {/* Tilt em wrapper interno: o motion.div externo segue dono de
+          x/y/rotate/scale (leque + hover do Framer); o Tilt só adiciona
+          rotateX/Y + glare por dentro — sem conflito de transform. */}
+      <Tilt max={5} perspective={1000} glare>
+        <CardBody item={item} />
+      </Tilt>
     </motion.div>
   );
 }

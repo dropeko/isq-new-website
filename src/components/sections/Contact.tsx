@@ -1,12 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { motion, type Variants } from "motion/react";
 import { useTranslations } from "next-intl";
 import Container from "@/components/ui/Container";
+import ScanDivider from "@/components/ui/ScanDivider";
+import ChapterMarker from "@/components/ui/ChapterMarker";
+import Magnetic from "@/components/ui/Magnetic";
+import InspectionSeal from "@/components/contact/InspectionSeal";
 import ContactFormModal from "@/components/contact/ContactFormModal";
-import { photoCredits } from "@/data/photoCredits";
+
+const GRID =
+  "repeating-linear-gradient(0deg, rgba(227,236,245,0.35) 0 1px, transparent 1px 28px), repeating-linear-gradient(90deg, rgba(227,236,245,0.35) 0 1px, transparent 1px 28px)";
 
 const containerVariants: Variants = {
   hidden: {},
@@ -70,23 +75,12 @@ export default function Contact() {
       aria-label="Contato"
       className="relative isolate overflow-hidden bg-isq-off pt-[clamp(4.5rem,9vw,7.5rem)] pb-[clamp(4.5rem,9vw,7.5rem)]"
     >
-      <span
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 mx-auto block h-px w-full max-w-[110rem] bg-isq-navy/10"
-      />
+      <ScanDivider />
 
       <Container className="relative">
         <div className="grid grid-cols-12 gap-x-8 gap-y-12">
           <div className="col-span-12 lg:col-span-2">
-            <motion.span
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.6 }}
-              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              className="block text-[10px] font-medium uppercase tracking-[0.32em] text-isq-red"
-            >
-              {t("section")}
-            </motion.span>
+            <ChapterMarker section={t("section")} />
           </div>
 
           <div className="col-span-12 lg:col-span-6 lg:pl-4">
@@ -124,19 +118,21 @@ export default function Contact() {
               variants={fadeVariants}
               className="mt-10 flex flex-col items-start gap-6 lg:mt-14"
             >
-              <button
-                type="button"
-                onClick={() => setOpen(true)}
-                className="group inline-flex items-center gap-4 rounded-full bg-isq-navy px-8 py-5 text-sm font-semibold uppercase tracking-[0.18em] text-isq-off transition-[transform,background] duration-500 hover:-translate-y-0.5 hover:bg-isq-red"
-              >
-                {t("cta")}
-                <span
-                  aria-hidden
-                  className="inline-block text-base transition-transform duration-500 group-hover:translate-x-1"
+              <Magnetic strength={12}>
+                <button
+                  type="button"
+                  onClick={() => setOpen(true)}
+                  className="group inline-flex items-center gap-4 rounded-full bg-isq-navy px-8 py-5 text-sm font-semibold uppercase tracking-[0.18em] text-isq-off transition-[transform,background] duration-500 hover:-translate-y-0.5 hover:bg-isq-red"
                 >
-                  →
-                </span>
-              </button>
+                  {t("cta")}
+                  <span
+                    aria-hidden
+                    className="inline-block text-base transition-transform duration-500 group-hover:translate-x-1"
+                  >
+                    →
+                  </span>
+                </button>
+              </Magnetic>
 
               <span className="text-[11px] uppercase tracking-[0.28em] text-isq-navy/45">
                 {t("or")}
@@ -180,7 +176,7 @@ export default function Contact() {
             </motion.div>
           </div>
 
-          {/* Coluna lateral — atmosfera */}
+          {/* Coluna lateral — selo de inspeção (fecho / bookend do Hero) */}
           <motion.div
             initial={{ opacity: 0, y: 32 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -188,14 +184,34 @@ export default function Contact() {
             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
             className="col-span-12 hidden lg:col-span-4 lg:block"
           >
-            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2px] bg-isq-navy/5">
-              <Image
-                src={photoCredits.contactSide.src}
-                alt={photoCredits.contactSide.alt}
-                fill
-                sizes="(max-width: 1024px) 0px, 30vw"
-                className="object-cover"
+            <div
+              className="relative flex aspect-[4/5] w-full items-center justify-center overflow-hidden rounded-[2px] px-4"
+              style={{
+                background:
+                  "radial-gradient(120% 100% at 50% 30%, #16273d 0%, #0b1623 60%, #070e18 100%)",
+              }}
+            >
+              {/* Grade técnica sutil */}
+              <div
+                aria-hidden
+                className="absolute inset-0 opacity-[0.10]"
+                style={{ backgroundImage: GRID, backgroundPosition: "center" }}
               />
+
+              <InspectionSeal />
+
+              {/* Vinheta interna */}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0"
+                style={{ boxShadow: "inset 0 0 100px 20px rgba(7,14,24,0.6)" }}
+              />
+
+              {/* Rótulo técnico */}
+              <div className="pointer-events-none absolute bottom-4 left-5 flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.28em] text-isq-off/70">
+                <span aria-hidden className="h-px w-6 bg-isq-red" />
+                n.06 · inspeção concluída
+              </div>
             </div>
           </motion.div>
         </div>

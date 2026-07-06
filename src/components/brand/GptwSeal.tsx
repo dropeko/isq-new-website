@@ -8,6 +8,8 @@ type Props = {
   caption?: string;
   /** Stack horizontal (selo + texto lado-a-lado) ou vertical (selo em cima) */
   orientation?: "horizontal" | "vertical";
+  /** Cor do texto conforme o fundo da seção. */
+  tone?: "light" | "dark";
 };
 
 /**
@@ -25,8 +27,10 @@ export default function GptwSeal({
   label = "Selo · Brasil",
   caption = "Great Place to Work · Certificada 2025/26",
   orientation = "vertical",
+  tone = "light",
 }: Props) {
   const isVertical = orientation === "vertical";
+  const captionColor = tone === "dark" ? "text-isq-off" : "text-isq-navy";
 
   const inner = (
     <span
@@ -48,7 +52,7 @@ export default function GptwSeal({
         <span className="text-[10px] font-medium uppercase tracking-[0.32em] text-isq-red">
           {label}
         </span>
-        <span className="text-sm font-medium leading-snug text-isq-navy transition-colors duration-500 group-hover:text-isq-red sm:text-[15px]">
+        <span className={`text-sm font-medium leading-snug ${captionColor} transition-colors duration-500 group-hover:text-isq-red sm:text-[15px]`}>
           {caption}
         </span>
       </span>

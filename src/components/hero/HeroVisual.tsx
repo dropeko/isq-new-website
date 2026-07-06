@@ -1,8 +1,16 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { motion } from "motion/react";
 import Image, { type ImageLoaderProps } from "next/image";
 import TechnicalOverlay from "./TechnicalOverlay";
+import { use3DCapable } from "@/lib/use3DCapable";
+
+/**
+ * Cena WebGL carregada só no cliente. Em SSR e em dispositivos sem suporte
+ * (mobile, reduced-motion, sem WebGL) nunca é baixada — o fallback é a foto.
+ */
+const HeroScene = dynamic(() => import("./scene/HeroScene"), { ssr: false });
 
 /**
  * Loader custom para imagens do Unsplash — usa a CDN deles
@@ -25,9 +33,11 @@ const HERO_PHOTO_ALT =
 const HERO_PHOTO_CREDIT = "Crystal Kwok · Unsplash";
 
 export default function HeroVisual() {
+  const enable3D = use3DCapable();
+
   return (
     <div className="relative h-[60vh] min-h-[420px] w-full overflow-hidden rounded-[2px] lg:h-[80vh]">
-      {/* Clip-path reveal: a "cortina" sobe de baixo para cima */}
+      {/* Base: foto com reveal por clip-path (SSR + fallback) */}
       <motion.div
         initial={{ clipPath: "inset(100% 0% 0% 0%)" }}
         animate={{ clipPath: "inset(0% 0% 0% 0%)" }}
@@ -44,8 +54,6 @@ export default function HeroVisual() {
           quality={85}
           className="object-cover"
         />
-        {/* Gradient de leitura — escurece sutilmente as bordas para o overlay técnico
-            (em deep navy) manter contraste sobre o aço claro da foto */}
         <div
           aria-hidden
           className="absolute inset-0"
@@ -54,17 +62,50 @@ export default function HeroVisual() {
               "linear-gradient(180deg, rgba(11,22,35,0.10) 0%, rgba(11,22,35,0.00) 30%, rgba(11,22,35,0.00) 70%, rgba(11,22,35,0.35) 100%)",
           }}
         />
-        {/* Crédito do fotógrafo — discreto no canto inferior direito */}
-        <div className="absolute bottom-5 right-5 flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.28em] text-isq-off/75">
-          <span aria-hidden className="h-px w-6 bg-isq-off/45" />
-          Foto · {HERO_PHOTO_CREDIT}
-        </div>
+        {!enable3D && (
+          <div className="absolute bottom-5 right-5 flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.28em] text-isq-off/75">
+            <span aria-hidden className="h-px w-6 bg-isq-off/45" />
+            Foto · {HERO_PHOTO_CREDIT}
+          </div>
+        )}
       </motion.div>
 
-      {/* Overlay técnico animado por cima do visual */}
-      <div className="pointer-events-none absolute inset-0">
-        <TechnicalOverlay />
-      </div>
+      {/* Fallback: overlay técnico em SVG sobre a foto (quando não há 3D) */}
+      {!enable3D && (
+        <div className="pointer-events-none absolute inset-0">
+          <TechnicalOverlay />
+        </div>
+      )}
+
+      {/* Painel de inspeção 3D — sobe sobre a foto após o reveal dela.
+          Narrativa: material físico (foto) → ensaio técnico (cena WebGL). */}
+      {enable3D && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.1, delay: 1.45, ease: [0.22, 1, 0.36, 1] }}
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(120% 90% at 50% 16%, #16273d 0%, #0b1623 58%, #070e18 100%)",
+          }}
+        >
+          <HeroScene />
+
+          {/* Vinheta interna — assenta a peça no painel */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0"
+            style={{ boxShadow: "inset 0 0 140px 24px rgba(7,14,24,0.65)" }}
+          />
+
+          {/* Rótulo técnico do painel */}
+          <div className="pointer-events-none absolute bottom-5 left-5 flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.28em] text-isq-off/70">
+            <span aria-hidden className="h-px w-6 bg-isq-red" />
+            Inspeção · Ensaios não-destrutivos
+          </div>
+        </motion.div>
+      )}
     </div>
   );
 }

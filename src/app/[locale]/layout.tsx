@@ -9,6 +9,7 @@ import ScrollTriggerProvider from "@/components/providers/ScrollTriggerProvider"
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import IntroScreen from "@/components/intro/IntroScreen";
+import InspectionCursor from "@/components/ui/InspectionCursor";
 import OrganizationJsonLd from "@/components/seo/OrganizationJsonLd";
 import WebSiteJsonLd from "@/components/seo/WebSiteJsonLd";
 import { SITE_URL } from "@/lib/seo/site";
@@ -100,6 +101,7 @@ export default async function LocaleLayout({
         >
           {locale === "en" ? "Skip to content" : locale === "es" ? "Saltar al contenido" : "Pular para o conteúdo"}
         </a>
+        <InspectionCursor />
         <OrganizationJsonLd />
         <WebSiteJsonLd />
         <NextIntlClientProvider locale={locale} messages={messages}>

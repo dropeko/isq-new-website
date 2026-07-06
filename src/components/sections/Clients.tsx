@@ -14,6 +14,8 @@ import {
 } from "motion/react";
 import { useTranslations } from "next-intl";
 import Container from "@/components/ui/Container";
+import ScanDivider from "@/components/ui/ScanDivider";
+import ChapterMarker from "@/components/ui/ChapterMarker";
 
 const fadeVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
@@ -62,23 +64,12 @@ export default function Clients() {
       aria-label="Clientes"
       className="relative isolate overflow-hidden bg-isq-off py-[clamp(4.5rem,9vw,7.5rem)]"
     >
-      <span
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 mx-auto block h-px w-full max-w-[110rem] bg-isq-navy/10"
-      />
+      <ScanDivider />
 
       <Container>
         <div className="grid grid-cols-12 gap-y-10">
           <div className="col-span-12 lg:col-span-2">
-            <motion.span
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.6 }}
-              variants={fadeVariants}
-              className="block text-[10px] font-medium uppercase tracking-[0.32em] text-isq-red"
-            >
-              {t("section")}
-            </motion.span>
+            <ChapterMarker section={t("section")} />
           </div>
           <div className="col-span-12 lg:col-span-10 lg:pl-4">
             <motion.h2
