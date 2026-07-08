@@ -13,9 +13,12 @@ import InspectionPart from "./InspectionPart";
  * navy do HeroVisual entra como fundo. O Environment com Lightformers dá
  * os reflexos no aço sem depender de HDR externo (auto-contido / offline).
  */
-export default function HeroScene() {
+export default function HeroScene({ active = true }: { active?: boolean }) {
   return (
     <Canvas
+      // Pausa o loop quando o Hero sai da viewport (economiza GPU no resto
+      // da página). "demand" só re-renderiza sob invalidação → useFrame para.
+      frameloop={active ? "always" : "demand"}
       dpr={[1, 2]}
       gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
       camera={{ position: [2.1, 0.45, 6.7], fov: 32 }}

@@ -5,8 +5,10 @@ import Image from "next/image";
 import {
   motion,
   useMotionValue,
+  useReducedMotion,
   useScroll,
   useTransform,
+  type MotionValue,
   type Variants,
 } from "motion/react";
 import { useTranslations } from "next-intl";
@@ -122,6 +124,13 @@ export default function Fronts() {
     clamp: true,
   });
 
+  // Profundidade horizontal: as fotos deslizam mais devagar que os painéis
+  // (parallax de tracking shot). Bounded a ±8% da própria largura — a foto
+  // "transborda" 10% de cada lado (ver FrontPanel), então nunca revela borda.
+  const reduce = useReducedMotion();
+  const photoParallax = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
+  const photoX = reduce ? undefined : photoParallax;
+
   return (
     <section
       ref={sectionRef}
@@ -186,7 +195,7 @@ export default function Fronts() {
               className="flex w-max items-stretch gap-[clamp(2.5rem,4vw,4.5rem)] pl-[var(--container-px)] pr-[8vw] will-change-transform"
             >
               {fronts.map((f) => (
-                <FrontPanel key={f.number} {...f} />
+                <FrontPanel key={f.number} {...f} photoX={photoX} />
               ))}
             </motion.div>
           </div>
@@ -234,7 +243,8 @@ function FrontPanel({
   cta,
   href,
   photo,
-}: Front) {
+  photoX,
+}: Front & { photoX?: MotionValue<string> }) {
   return (
     <a
       href={href}
@@ -245,13 +255,20 @@ function FrontPanel({
         {/* Photo */}
         <div className="col-span-7 flex items-center">
           <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[2px] bg-isq-navy/5">
-            <Image
-              src={photo.src}
-              alt={photo.alt}
-              fill
-              sizes="(min-width: 1024px) 45vw, 100vw"
-              className="object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
-            />
+            {/* Foto "transborda" 10% de cada lado e desliza (parallax) dentro
+                do quadro conforme a trilha rola — profundidade de tracking shot */}
+            <motion.div
+              style={{ x: photoX }}
+              className="absolute inset-y-0 -inset-x-[10%] will-change-transform"
+            >
+              <Image
+                src={photo.src}
+                alt={photo.alt}
+                fill
+                sizes="(min-width: 1024px) 55vw, 100vw"
+                className="object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
+              />
+            </motion.div>
             {/* Gradient inferior para o badge do número manter contraste */}
             <span
               aria-hidden

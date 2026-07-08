@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useId, type FormEvent } from "react";
+import { useState, useId, useEffect, useRef, type FormEvent } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
 import { clsx } from "clsx";
 
@@ -22,6 +22,14 @@ export default function ContactFormModal({ open, onOpenChange }: ContactFormModa
   const t = useTranslations("contactForm");
   const [status, setStatus] = useState<Status>("idle");
   const formId = useId();
+  const reduce = useReducedMotion();
+  const successRef = useRef<HTMLHeadingElement>(null);
+
+  // Ao enviar, leva o foco para o título de sucesso (o botão de submit some,
+  // senão o foco se perderia — leitor de teclado/tela).
+  useEffect(() => {
+    if (status === "success") successRef.current?.focus();
+  }, [status]);
 
   async function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -82,15 +90,26 @@ export default function ContactFormModal({ open, onOpenChange }: ContactFormModa
               }}
             >
               <motion.div
-                initial={{ opacity: 0, y: 24, scale: 0.98 }}
+                initial={{ opacity: 0, y: reduce ? 0 : 24, scale: reduce ? 1 : 0.98 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: 16, scale: 0.98 }}
+                exit={{ opacity: 0, y: reduce ? 0 : 16, scale: reduce ? 1 : 0.98 }}
                 transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                 className={clsx(
                   "fixed left-1/2 top-1/2 z-[90] w-[min(640px,92vw)] -translate-x-1/2 -translate-y-1/2",
                   "max-h-[92vh] overflow-y-auto rounded-[2px] bg-isq-paper shadow-2xl",
                 )}
               >
+                {/* Scan de abertura — o modal "abre" na linguagem do site
+                    (eco do ScanDivider que abre cada seção) */}
+                <motion.span
+                  aria-hidden
+                  className="pointer-events-none absolute inset-x-0 top-0 z-10 block h-px origin-left bg-isq-red/70"
+                  style={{ boxShadow: "0 0 10px 0 rgba(214,0,0,0.5)" }}
+                  initial={{ scaleX: reduce ? 1 : 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ duration: 0.8, delay: 0.15, ease: [0.65, 0, 0.35, 1] }}
+                />
+
                 {/* Header */}
                 <div className="relative flex items-start justify-between gap-6 border-b border-isq-navy/10 px-7 pb-6 pt-7 sm:px-10 sm:pt-9">
                   <div>
@@ -142,7 +161,11 @@ export default function ContactFormModal({ open, onOpenChange }: ContactFormModa
                         />
                       </svg>
                     </span>
-                    <h3 className="font-serif text-2xl tracking-tight text-isq-navy">
+                    <h3
+                      ref={successRef}
+                      tabIndex={-1}
+                      className="font-serif text-2xl tracking-tight text-isq-navy outline-none"
+                    >
                       {t("successTitle")}
                     </h3>
                     <p className="max-w-md text-sm leading-relaxed text-isq-navy/65">
@@ -218,7 +241,7 @@ export default function ContactFormModal({ open, onOpenChange }: ContactFormModa
                         name="message"
                         required
                         rows={4}
-                        className="w-full resize-none rounded-[2px] border border-isq-navy/15 bg-white/40 px-4 py-3 text-sm text-isq-navy placeholder:text-isq-navy/30 focus:border-isq-navy focus:bg-white focus:outline-none"
+                        className="w-full resize-none rounded-[2px] border border-isq-navy/15 bg-white/40 px-4 py-3 text-sm text-isq-navy placeholder:text-isq-navy/30 focus:border-isq-red focus:bg-white"
                       />
                     </div>
 
@@ -308,7 +331,7 @@ function Field({
         type={type}
         required={required}
         autoComplete={autoComplete}
-        className="w-full rounded-[2px] border border-isq-navy/15 bg-white/40 px-4 py-3 text-sm text-isq-navy placeholder:text-isq-navy/30 focus:border-isq-navy focus:bg-white focus:outline-none"
+        className="w-full rounded-[2px] border border-isq-navy/15 bg-white/40 px-4 py-3 text-sm text-isq-navy placeholder:text-isq-navy/30 focus:border-isq-red focus:bg-white"
       />
     </div>
   );
@@ -348,7 +371,7 @@ function SelectField({
           name={name}
           required={required}
           defaultValue=""
-          className="w-full appearance-none rounded-[2px] border border-isq-navy/15 bg-white/40 px-4 py-3 pr-10 text-sm text-isq-navy focus:border-isq-navy focus:bg-white focus:outline-none"
+          className="w-full appearance-none rounded-[2px] border border-isq-navy/15 bg-white/40 px-4 py-3 pr-10 text-sm text-isq-navy focus:border-isq-red focus:bg-white"
         >
           <option value="" disabled>
             {placeholder}
@@ -359,12 +382,20 @@ function SelectField({
             </option>
           ))}
         </select>
-        <span
+        <svg
           aria-hidden
           className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-isq-navy/45"
+          width="12"
+          height="12"
+          viewBox="0 0 12 12"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.4"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         >
-          ▾
-        </span>
+          <path d="M2.5 4.5L6 8l3.5-3.5" />
+        </svg>
       </div>
     </div>
   );

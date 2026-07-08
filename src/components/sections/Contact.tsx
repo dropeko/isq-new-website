@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, type Variants } from "motion/react";
+import { motion, useReducedMotion, type Variants } from "motion/react";
 import { useTranslations } from "next-intl";
 import Container from "@/components/ui/Container";
 import ScanDivider from "@/components/ui/ScanDivider";
@@ -68,6 +68,7 @@ export default function Contact() {
   const t = useTranslations("contact");
   const tFooter = useTranslations("footer");
   const [open, setOpen] = useState(false);
+  const reduce = useReducedMotion();
 
   return (
     <section
@@ -77,7 +78,25 @@ export default function Contact() {
     >
       <ScanDivider />
 
-      <Container className="relative">
+      {/* Sign-off — a varredura FINAL do site cruza a seção (o último scan),
+          "assinando" a navegação. Passa uma vez, ao chegar. */}
+      {!reduce && (
+        <motion.div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 z-20 overflow-hidden"
+        >
+          <motion.span
+            className="absolute inset-x-0 block h-px bg-gradient-to-r from-transparent via-isq-red to-transparent"
+            style={{ boxShadow: "0 0 18px 2px rgba(214,0,0,0.5)" }}
+            initial={{ top: "-3%", opacity: 0 }}
+            whileInView={{ top: "103%", opacity: [0, 0.85, 0.85, 0] }}
+            viewport={{ once: true, amount: 0.35 }}
+            transition={{ duration: 1.7, delay: 0.25, ease: [0.65, 0, 0.35, 1] }}
+          />
+        </motion.div>
+      )}
+
+      <Container className="relative z-10">
         <div className="grid grid-cols-12 gap-x-8 gap-y-12">
           <div className="col-span-12 lg:col-span-2">
             <ChapterMarker section={t("section")} />
@@ -216,6 +235,33 @@ export default function Contact() {
           </motion.div>
         </div>
       </Container>
+
+      {/* Assinatura de fecho — o site "assina" a navegação (após a varredura) */}
+      <div className="relative z-10 mt-[clamp(3.5rem,7vw,6rem)]">
+        <div className="mx-auto flex max-w-[110rem] items-center gap-4 px-[var(--container-px)]">
+          <motion.span
+            aria-hidden
+            className="block h-px flex-1 origin-left bg-isq-red/40"
+            initial={reduce ? { scaleX: 1 } : { scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true, amount: 0.6 }}
+            transition={{
+              duration: 1.2,
+              delay: reduce ? 0 : 1.1,
+              ease: [0.65, 0, 0.35, 1],
+            }}
+          />
+          <motion.span
+            className="whitespace-nowrap font-mono text-[10px] uppercase tracking-[0.28em] text-isq-navy/45"
+            initial={reduce ? { opacity: 1 } : { opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, amount: 0.6 }}
+            transition={{ duration: 0.6, delay: reduce ? 0 : 1.5 }}
+          >
+            assinado · ISQ Brasil · 2026
+          </motion.span>
+        </div>
+      </div>
 
       <ContactFormModal open={open} onOpenChange={setOpen} />
     </section>

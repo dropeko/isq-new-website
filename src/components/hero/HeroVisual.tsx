@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { motion } from "motion/react";
 import Image, { type ImageLoaderProps } from "next/image";
@@ -34,9 +35,27 @@ const HERO_PHOTO_CREDIT = "Crystal Kwok · Unsplash";
 
 export default function HeroVisual() {
   const enable3D = use3DCapable();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(true);
+
+  // Pausa o frameloop do Hero quando ele sai da viewport (economiza GPU no
+  // resto da página). Começa true — o Hero está visível no load.
+  useEffect(() => {
+    if (!enable3D || !containerRef.current) return;
+    const el = containerRef.current;
+    const io = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { rootMargin: "150px 0px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [enable3D]);
 
   return (
-    <div className="relative h-[60vh] min-h-[420px] w-full overflow-hidden rounded-[2px] lg:h-[80vh]">
+    <div
+      ref={containerRef}
+      className="relative h-[60vh] min-h-[420px] w-full overflow-hidden rounded-[2px] lg:h-[80vh]"
+    >
       {/* Base: foto com reveal por clip-path (SSR + fallback) */}
       <motion.div
         initial={{ clipPath: "inset(100% 0% 0% 0%)" }}
@@ -90,7 +109,7 @@ export default function HeroVisual() {
               "radial-gradient(120% 90% at 50% 16%, #16273d 0%, #0b1623 58%, #070e18 100%)",
           }}
         >
-          <HeroScene />
+          <HeroScene active={inView} />
 
           {/* Vinheta interna — assenta a peça no painel */}
           <div
