@@ -1,10 +1,11 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import {
   motion,
   useAnimationFrame,
   useMotionValue,
+  useReducedMotion,
   useScroll,
   useSpring,
   useTransform,
@@ -58,6 +59,7 @@ export default function Clients() {
   // Divide alternado para os dois trilhos terem variedade de pesos
   const rowA = names.filter((_, i) => i % 2 === 0);
   const rowB = names.filter((_, i) => i % 2 === 1);
+  const reduce = useReducedMotion();
 
   return (
     <section
@@ -108,24 +110,29 @@ export default function Clients() {
         </div>
       </Container>
 
-      {/* Marquee — fora do Container para correr full-bleed. Máscara
-          lateral em gradiente desvanece as bordas, evitando o corte
-          duro contra o fundo off-white. */}
-      <div
-        className="relative mt-[clamp(3rem,6vw,5rem)] [mask-image:linear-gradient(to_right,transparent_0,#000_8%,#000_92%,transparent_100%)]"
-        aria-hidden
-      >
-        <MarqueeRow names={rowA} baseVelocity={-1.2} />
-        <MarqueeRow names={rowB} baseVelocity={1.5} className="mt-3" />
-      </div>
+      {reduce ? (
+        /* Reduced-motion: grade estática acessível (sem auto-scroll) */
+        <StaticNames names={names} />
+      ) : (
+        <>
+          {/* Marquee full-bleed com máscara lateral. Hover PAUSA a linha
+              (leitura) e cada nome vira "✓ verificado" vermelho. */}
+          <div
+            className="relative mt-[clamp(3rem,6vw,5rem)] [mask-image:linear-gradient(to_right,transparent_0,#000_8%,#000_92%,transparent_100%)]"
+            aria-hidden
+          >
+            <MarqueeRow names={rowA} baseVelocity={-1.2} />
+            <MarqueeRow names={rowB} baseVelocity={1.5} className="mt-3" />
+          </div>
 
-      {/* Lista acessível, oculta visualmente — preserva SEO/leitor de tela
-          já que o marquee é aria-hidden */}
-      <ul className="sr-only">
-        {names.map((name) => (
-          <li key={name}>{name}</li>
-        ))}
-      </ul>
+          {/* Lista acessível — o marquee é aria-hidden */}
+          <ul className="sr-only">
+            {names.map((name) => (
+              <li key={name}>{name}</li>
+            ))}
+          </ul>
+        </>
+      )}
     </section>
   );
 }
@@ -158,8 +165,27 @@ function MarqueeRow({ names, baseVelocity, className }: RowProps) {
   const x = useTransform(baseX, (v) => `${wrap(-25, -75, v)}%`);
 
   const directionFactor = useRef<number>(1);
+  const paused = useRef(false);
+  const rowRef = useRef<HTMLDivElement>(null);
+  const inView = useRef(false);
+
+  // Pausa o marquee quando a linha sai da viewport — não gasta RAF/transform
+  // com a seção fora da tela (perf).
+  useEffect(() => {
+    const el = rowRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([e]) => {
+        inView.current = e.isIntersecting;
+      },
+      { rootMargin: "100px 0px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   useAnimationFrame((_t, delta) => {
+    if (paused.current || !inView.current) return; // hover ou fora da tela
     let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
 
     // Quando o usuário rola, a direção do marquee se alinha com a
@@ -176,7 +202,16 @@ function MarqueeRow({ names, baseVelocity, className }: RowProps) {
   });
 
   return (
-    <div className={`flex overflow-hidden ${className ?? ""}`}>
+    <div
+      ref={rowRef}
+      className={`flex overflow-hidden ${className ?? ""}`}
+      onMouseEnter={() => {
+        paused.current = true;
+      }}
+      onMouseLeave={() => {
+        paused.current = false;
+      }}
+    >
       <motion.div
         style={{ x }}
         className="flex shrink-0 items-baseline gap-[clamp(2rem,4vw,4.5rem)] whitespace-nowrap pr-[clamp(2rem,4vw,4.5rem)] will-change-transform"
@@ -203,12 +238,53 @@ function MarqueeItem({ index, name }: { index: number; name: string }) {
 
   return (
     <span
-      className={`inline-flex items-baseline gap-2 text-isq-navy transition-colors duration-500 hover:text-isq-red ${styleClass}`}
+      className={`group inline-flex items-baseline gap-2 text-isq-navy transition-colors duration-500 hover:text-isq-red ${styleClass}`}
     >
-      <span aria-hidden className="text-[10px] font-mono text-isq-navy/30">
+      <span
+        aria-hidden
+        className="text-[10px] font-mono text-isq-navy/30 transition-colors duration-500 group-hover:text-isq-red"
+      >
         ·
       </span>
       <span>{name}</span>
+      {/* Selo "verificado" — sutil por padrão, acende no hover (parceiro
+          inspecionado/confiável pela ISQ) */}
+      <span
+        aria-hidden
+        className="ml-0.5 self-center text-isq-navy/20 transition-colors duration-500 group-hover:text-isq-red"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          width="0.6em"
+          height="0.6em"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={3}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M5 13l4 4L19 7" />
+        </svg>
+      </span>
     </span>
+  );
+}
+
+/**
+ * StaticNames — fallback para prefers-reduced-motion: os mesmos nomes em
+ * grade estática, legível e acessível (sem auto-scroll). Reusa MarqueeItem
+ * para manter a tipografia e o selo "verificado".
+ */
+function StaticNames({ names }: { names: string[] }) {
+  return (
+    <div className="mt-[clamp(3rem,6vw,5rem)] px-[var(--container-px)]">
+      <ul className="mx-auto flex max-w-[110rem] flex-wrap items-baseline gap-x-[clamp(1.5rem,3vw,3rem)] gap-y-4">
+        {names.map((name, i) => (
+          <li key={name}>
+            <MarqueeItem index={i} name={name} />
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }

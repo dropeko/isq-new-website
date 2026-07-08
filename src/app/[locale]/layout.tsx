@@ -3,6 +3,7 @@ import { Fraunces, Inter } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
+import { MotionConfig } from "motion/react";
 import { routing, type Locale } from "@/i18n/routing";
 import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 import ScrollTriggerProvider from "@/components/providers/ScrollTriggerProvider";
@@ -105,14 +106,18 @@ export default async function LocaleLayout({
         <OrganizationJsonLd />
         <WebSiteJsonLd />
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <ScrollTriggerProvider>
-            <SmoothScrollProvider>
-              <IntroScreen />
-              <Header />
-              <main id="main">{children}</main>
-              <Footer />
-            </SmoothScrollProvider>
-          </ScrollTriggerProvider>
+          {/* Reduced-motion abrangente: o Motion respeita prefers-reduced-motion
+              em todas as animações (desliga transforms, mantém opacidade). */}
+          <MotionConfig reducedMotion="user">
+            <ScrollTriggerProvider>
+              <SmoothScrollProvider>
+                <IntroScreen />
+                <Header />
+                <main id="main">{children}</main>
+                <Footer />
+              </SmoothScrollProvider>
+            </ScrollTriggerProvider>
+          </MotionConfig>
         </NextIntlClientProvider>
       </body>
     </html>
