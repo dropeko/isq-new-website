@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import {
   motion,
   useMotionValue,
@@ -38,15 +38,32 @@ export default function ManifestoDepth({
   const my = useMotionValue(0);
   const smx = useSpring(mx, { stiffness: 60, damping: 20, mass: 0.4 });
   const smy = useSpring(my, { stiffness: 60, damping: 20, mass: 0.4 });
+  const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (reduce) return;
+    const el = rootRef.current;
+    let inView = false;
+    const io = el
+      ? new IntersectionObserver(
+          ([e]) => {
+            inView = e.isIntersecting;
+          },
+          { rootMargin: "100px 0px" },
+        )
+      : undefined;
+    if (io && el) io.observe(el);
+    // Só processa o cursor quando a seção está na viewport (perf).
     const onMove = (e: PointerEvent) => {
+      if (!inView) return;
       mx.set(e.clientX / window.innerWidth - 0.5);
       my.set(e.clientY / window.innerHeight - 0.5);
     };
     window.addEventListener("pointermove", onMove, { passive: true });
-    return () => window.removeEventListener("pointermove", onMove);
+    return () => {
+      io?.disconnect();
+      window.removeEventListener("pointermove", onMove);
+    };
   }, [reduce, mx, my]);
 
   // Parallax de scroll + zoom por plano.
@@ -66,6 +83,7 @@ export default function ManifestoDepth({
 
   return (
     <div
+      ref={rootRef}
       aria-hidden
       className="pointer-events-none absolute inset-0 overflow-hidden text-isq-navy"
     >

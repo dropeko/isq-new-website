@@ -78,8 +78,9 @@ export default function Manifesto() {
   return (
     <section
       ref={ref}
+      id="sobre"
       aria-label="Manifesto"
-      className="relative isolate overflow-hidden bg-isq-off py-[clamp(3.5rem,7.5vw,6rem)] text-isq-navy"
+      className="relative isolate scroll-mt-[88px] overflow-hidden bg-isq-off py-[clamp(3.5rem,7.5vw,6rem)] text-isq-navy"
     >
       {/* Transição de fronteira — scan-line desenha do Hero p/ o Manifesto */}
       <ScanDivider />

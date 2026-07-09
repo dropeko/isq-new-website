@@ -6,7 +6,6 @@ import { notFound } from "next/navigation";
 import { MotionConfig } from "motion/react";
 import { routing, type Locale } from "@/i18n/routing";
 import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
-import ScrollTriggerProvider from "@/components/providers/ScrollTriggerProvider";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import IntroScreen from "@/components/intro/IntroScreen";
@@ -109,14 +108,12 @@ export default async function LocaleLayout({
           {/* Reduced-motion abrangente: o Motion respeita prefers-reduced-motion
               em todas as animações (desliga transforms, mantém opacidade). */}
           <MotionConfig reducedMotion="user">
-            <ScrollTriggerProvider>
-              <SmoothScrollProvider>
-                <IntroScreen />
-                <Header />
-                <main id="main">{children}</main>
-                <Footer />
-              </SmoothScrollProvider>
-            </ScrollTriggerProvider>
+            <SmoothScrollProvider>
+              <IntroScreen />
+              <Header />
+              <main id="main">{children}</main>
+              <Footer />
+            </SmoothScrollProvider>
           </MotionConfig>
         </NextIntlClientProvider>
       </body>

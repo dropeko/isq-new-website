@@ -63,8 +63,9 @@ export default function Stats() {
   return (
     <section
       ref={sectionRef}
+      id="insights"
       aria-label="Em números"
-      className="relative isolate overflow-hidden pt-[clamp(4.5rem,9vw,7.5rem)] pb-[clamp(4rem,8vw,6.5rem)] text-isq-off"
+      className="relative isolate scroll-mt-[88px] overflow-hidden pt-[clamp(4.5rem,9vw,7.5rem)] pb-[clamp(4rem,8vw,6.5rem)] text-isq-off"
       style={{
         background:
           "radial-gradient(130% 90% at 50% 22%, #16273d 0%, #0b1623 55%, #060b13 100%)",

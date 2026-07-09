@@ -20,9 +20,11 @@ export default function Header() {
   return (
     <header
       className={clsx(
-        "fixed inset-x-0 top-0 z-50 transition-[background,backdrop-filter,border-color] duration-500",
+        "fixed inset-x-0 top-0 z-50 transition-[background-color,border-color] duration-500",
+        // Sem backdrop-blur: blur em header fixo re-borra o fundo a cada frame
+        // de scroll = trava. Fundo quase-sólido tem custo ~zero.
         scrolled
-          ? "border-b border-isq-navy/10 bg-isq-off/80 backdrop-blur-md"
+          ? "border-b border-isq-navy/10 bg-isq-off/95"
           : "border-b border-transparent bg-transparent",
       )}
     >

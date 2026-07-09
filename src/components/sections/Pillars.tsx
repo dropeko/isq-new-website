@@ -4,9 +4,9 @@ import { useRef } from "react";
 import { motion, useScroll, type Variants } from "motion/react";
 import { useTranslations } from "next-intl";
 import Container from "@/components/ui/Container";
-import ScanDivider from "@/components/ui/ScanDivider";
 import ChapterMarker from "@/components/ui/ChapterMarker";
 import PillarsDepth from "@/components/pillars/PillarsDepth";
+import PillarsConverge from "@/components/pillars/PillarsConverge";
 import Tilt from "@/components/ui/Tilt";
 
 const containerVariants: Variants = {
@@ -100,10 +100,13 @@ export default function Pillars() {
   return (
     <section
       ref={sectionRef}
+      id="solucoes"
       aria-label="Pilares"
-      className="relative isolate overflow-hidden bg-isq-off pt-[clamp(4.5rem,8vw,7rem)] pb-[clamp(4rem,7vw,6rem)]"
+      className="relative isolate scroll-mt-[88px] overflow-hidden bg-isq-off pt-[clamp(4.5rem,8vw,7rem)] pb-[clamp(4rem,7vw,6rem)]"
     >
-      <ScanDivider />
+      {/* Transição bespoke n.01 → n.02: a inspeção chega, trava e se ramifica
+          nos 4 pilares (substitui o ScanDivider genérico só nesta fronteira) */}
+      <PillarsConverge />
 
       {/* Profundidade em camadas — "pilares" blueprint (parallax + cursor) */}
       <PillarsDepth progress={scrollYProgress} />

@@ -134,8 +134,9 @@ export default function Fronts() {
   return (
     <section
       ref={sectionRef}
+      id="servicos"
       aria-label="Três frentes"
-      className="relative bg-isq-off lg:h-[320vh]"
+      className="relative scroll-mt-[88px] bg-isq-off lg:h-[320vh]"
     >
       <ScanDivider />
 
